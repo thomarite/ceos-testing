@@ -1,0 +1,16 @@
+links:
+  - endpoints: ["r01:eth0", "r02:eth0", "r11:eth0", "r12:eth0", "r21:eth0", "r22:eth0"]
+    driver: bridge
+  - endpoints: ["r01:eth1", "r02:eth1"]
+  - endpoints: ["r11:eth1", "r12:eth1"]
+  - endpoints: ["r21:eth1", "r22:eth1"]
+  - endpoints: ["r01:eth2", "r11:eth2"]
+  - endpoints: ["r12:eth2", "r22:eth2"]
+  - endpoints: ["r02:eth2", "r21:eth2"]
+
+VERSION: 2
+driver: bridge
+PREFIX: ring
+CONF_DIR: ./config
+CEOS_IMAGE: ceos-lab:4.23.3M
+PUBLISH_BASE: 9000

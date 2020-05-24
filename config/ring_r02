@@ -1,0 +1,133 @@
+
+> show running
+! Command: show running-config at line 1
+! device: r02 (cEOSLab, EOS-4.23.3M)
+!
+alias delta bash rm /.deltas/var/tmp/agents/core.*
+alias df bash df -hT
+alias sri show run | grep -i
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+agent Pimsm shutdown
+agent PimReg shutdown
+agent Bfd shutdown
+agent PowerManager shutdown
+agent LedPolicy shutdown
+agent Thermostat shutdown
+agent PowerFuse shutdown
+agent StandbyCpld shutdown
+agent LicenseManager shutdown
+!
+hostname r02
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+vrf instance CUST-A
+   rd 100:1
+!
+vrf instance CUST-B
+   rd 100:2
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.10.2/30
+   isis enable CORE
+   isis bfd
+   isis metric 40
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.13.1/30
+   no qos trust
+   isis enable CORE
+   isis bfd
+   isis metric 50
+   isis network point-to-point
+!
+interface Loopback1
+   description CORE Loopback
+   ip address 10.0.0.2/32
+   node-segment ipv4 index 2
+   isis enable CORE
+   isis metric 1
+!
+interface Loopback2
+   vrf CUST-A
+   ip address 192.168.0.2/32
+!
+ip routing
+ip routing vrf CUST-A
+ip routing vrf CUST-B
+!
+mpls ip
+!
+mpls label range isis-sr 800000 65536
+!
+router bgp 100
+   router-id 10.0.0.2
+   graceful-restart restart-time 300
+   graceful-restart
+   maximum-paths 2
+   neighbor AS100-CORE peer group
+   neighbor AS100-CORE remote-as 100
+   neighbor AS100-CORE next-hop-self
+   neighbor AS100-CORE update-source Loopback1
+   neighbor AS100-CORE timers 2 6
+   neighbor AS100-CORE additional-paths receive
+   neighbor AS100-CORE additional-paths send any
+   neighbor AS100-CORE password 7 Nmg+xbfVkywN7BBIllK5yw==
+   neighbor AS100-CORE send-community standard extended
+   neighbor AS100-CORE maximum-routes 0
+   neighbor 10.0.0.1 peer group AS100-CORE
+   neighbor 10.0.0.1 description R01
+   neighbor 10.0.0.3 peer group AS100-CORE
+   neighbor 10.0.0.3 description R11
+   neighbor 10.0.0.4 peer group AS100-CORE
+   neighbor 10.0.0.4 description R12
+   neighbor 10.0.0.5 peer group AS100-CORE
+   neighbor 10.0.0.5 description R21
+   neighbor 10.0.0.6 peer group AS100-CORE
+   neighbor 10.0.0.6 description R22
+   !
+   address-family evpn
+      neighbor default encapsulation mpls next-hop-self source-interface Loopback1
+      neighbor 10.0.0.1 activate
+      neighbor 10.0.0.3 activate
+      neighbor 10.0.0.4 activate
+      neighbor 10.0.0.5 activate
+      neighbor 10.0.0.6 activate
+   !
+   vrf CUST-A
+      rd 100:1
+      route-target import evpn 100:1
+      route-target export evpn 100:1
+      network 192.168.0.2/32
+!
+router isis CORE
+   net 49.0000.0001.0010.0000.0000.0002.00
+   is-type level-2
+   log-adjacency-changes
+   set-overload-bit on-startup wait-for-bgp timeout 180
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.0.0.2
+      no shutdown
+!
+router multicast
+   ipv4
+      routing
+!
+management api http-commands
+   protocol unix-socket
+   no shutdown
+!
+end

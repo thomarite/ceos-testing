@@ -1,0 +1,22 @@
+
+> show running
+! Command: show running-config at line 1
+! device: leaf2 (cEOSLab, EOS-4.23.3M)
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname leaf2
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+interface Ethernet1
+!
+interface Ethernet2
+!
+no ip routing
+!
+end

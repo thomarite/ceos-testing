@@ -1,0 +1,16 @@
+links:
+  - endpoints: ["spine1:eth0", "spine2:eth0", "leaf1:eth0", "leaf2:eth0", "leaf3:eth0"]
+    driver: bridge
+  - endpoints: ["spine1:eth1", "leaf1:eth1"]
+  - endpoints: ["spine1:eth2", "leaf2:eth1"]
+  - endpoints: ["spine1:eth3", "leaf3:eth1"]
+  - endpoints: ["spine2:eth1", "leaf1:eth2"]
+  - endpoints: ["spine2:eth2", "leaf2:eth2"]
+  - endpoints: ["spine2:eth3", "leaf3:eth2"]
+
+VERSION: 2
+driver: bridge
+PREFIX: 5-node
+CONF_DIR: ./config
+CEOS_IMAGE: ceos-lab:4.23.3M
+PUBLISH_BASE: 9000
