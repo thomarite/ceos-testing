@@ -6,6 +6,7 @@ So for getting docker-topo to work follow the instructions from the original rep
 
 First time:
 
+```
 pyenv local 3.7.3
 python3 -m pip install virtualenv
 python3 -m virtualenv testdir; cd testdir
@@ -17,13 +18,16 @@ docker ps -a
 docker-topo -s ring.yml   --> save config
 docker-topo --create ring.yml --> destroy topology
 deactivate
+```
 
 Afterwards:
 
+```
 cd testdir
 source bin/activate
 docker-topo --create ring.yml
 docker ps -a
+```
 
 You will need to create an account in arista.com (it is free) to downloand the cEOS images.
 
