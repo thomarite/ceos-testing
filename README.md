@@ -39,6 +39,25 @@ Issues found:
  - Need to disable all PIM processes ==> constant cores  -> can't run config, save config etc
  - mtu only 1500 -> isis doesnt come up --- I was expecting to be able to run jumbo frames... I am so naive...
  - show isis neighbor command fails but the routing shows the prefixes so it works under the hood.
+ - can't ping inside the L3VPN. I think it is something related to the broadcast of ARPs :(
+
+```
+r01#bash
+bash-4.2# 
+bash-4.2# ip netns exec ns-CUST-A tcpdump -i lo2
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on lo2, link-type EN10MB (Ethernet), capture size 262144 bytes
+
+^C12:43:03.027590 02:00:00:00:00:00 (oui Unknown) > Broadcast, ethertype ARP (0x0806), length 42: Request who-has 192.168.0.6 tell 192.168.0.1, length 28
+12:43:04.028753 02:00:00:00:00:00 (oui Unknown) > Broadcast, ethertype ARP (0x0806), length 42: Request who-has 192.168.0.6 tell 192.168.0.1, length 28
+12:43:05.052753 02:00:00:00:00:00 (oui Unknown) > Broadcast, ethertype ARP (0x0806), length 42: Request who-has 192.168.0.6 tell 192.168.0.1, length 28
+
+3 packets captured
+3 packets received by filter
+0 packets dropped by kernel
+bash-4.2# 
+
+```
 
 To-Dos
  - test ansible/napalm
