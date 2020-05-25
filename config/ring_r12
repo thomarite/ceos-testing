@@ -85,9 +85,9 @@ router bgp 100
    neighbor AS100-CORE send-community standard extended
    neighbor AS100-CORE maximum-routes 0
    neighbor 10.0.0.1 peer group AS100-CORE
-   neighbor 10.0.0.1 description R02
+   neighbor 10.0.0.1 description R01
    neighbor 10.0.0.2 peer group AS100-CORE
-   neighbor 10.0.0.2 description R11
+   neighbor 10.0.0.2 description R02
    neighbor 10.0.0.3 peer group AS100-CORE
    neighbor 10.0.0.3 description R11
    neighbor 10.0.0.5 peer group AS100-CORE
