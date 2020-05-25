@@ -1,0 +1,13 @@
+links:
+  - endpoints: ["r01:eth0", "r02:eth0", "r03:eth0"]
+    driver: bridge
+  - endpoints: ["r01:eth1", "r02:eth1"]
+  - endpoints: ["r01:eth2", "r03:eth1"]
+  - endpoints: ["r02:eth2", "r03:eth2"]
+
+VERSION: 2
+driver: bridge
+PREFIX: 3node
+CONF_DIR: ./config
+CEOS_IMAGE: ceos-lab:4.23.3M
+PUBLISH_BASE: 9000
