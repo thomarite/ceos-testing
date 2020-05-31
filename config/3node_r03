@@ -1,7 +1,7 @@
 
 > show running
 ! Command: show running-config at line 1
-! device: r01 (cEOSLab, EOS-4.23.3M)
+! device: r03 (cEOSLab, EOS-4.23.3M)
 !
 alias delta bash rm /.deltas/var/tmp/agents/core.*
 alias df bash df -hT
@@ -27,6 +27,8 @@ spanning-tree mode mstp
 !
 no aaa root
 !
+username api privilege 15 secret sha512 $6$7qUXPB33z5LreaAG$3NrPmvVrhOd/xqSDqwr/sIoKCafwp8m1k4LAOhp6S9aVoRrIwEuSb83fpNS/UJrKEQXQ3IQ0yz3EmlAdFLgoI/
+!
 vrf instance CUST-A
    rd 100:1
 !
@@ -50,7 +52,7 @@ interface Ethernet2
 interface Loopback1
    description CORE Loopback
    ip address 10.0.0.3/32
-   node-segment ipv4 index 1
+   node-segment ipv4 index 3
    isis enable CORE
    isis metric 1
 !

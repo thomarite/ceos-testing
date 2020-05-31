@@ -27,6 +27,8 @@ spanning-tree mode mstp
 !
 no aaa root
 !
+username api privilege 15 secret sha512 $6$L8Wt43AYBMiq9EHA$oARqOdX.locSFDdlwQzqJc9M8noIAgv1YMIQqpyi.DhvTlth.phl4RbAjS9wSFFvJeloABOL4tJ4lNIFOcwEH.
+!
 vrf instance CUST-A
    rd 100:1
 !
