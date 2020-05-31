@@ -10,4 +10,6 @@ driver: bridge
 PREFIX: 3node
 CONF_DIR: ./config
 CEOS_IMAGE: ceos-lab:4.23.3M
-PUBLISH_BASE: 9000
+PUBLISH_BASE:
+  443/tcp: 9000
+  22/tcp: 2000
