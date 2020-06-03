@@ -25,6 +25,8 @@ hostname r03
 !
 spanning-tree mode mstp
 !
+aaa authorization exec default local
+!
 no aaa root
 !
 username api privilege 15 secret sha512 $6$7qUXPB33z5LreaAG$3NrPmvVrhOd/xqSDqwr/sIoKCafwp8m1k4LAOhp6S9aVoRrIwEuSb83fpNS/UJrKEQXQ3IQ0yz3EmlAdFLgoI/
