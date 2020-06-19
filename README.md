@@ -39,7 +39,7 @@ Issues found:
  - Need to disable all PIM processes ==> constant cores  -> can't run config, save config etc
  - mtu only 1500 -> isis doesnt come up --- I was expecting to be able to run jumbo frames... I am so naive...
  - show isis neighbor command fails but the routing shows the prefixes so it works under the hood.
- - can't ping inside the L3VPN. I think it is something related to the broadcast of ARPs :(
+ - can't ping inside the L3VPN. I think it is something related to the broadcast of ARPs :( ==> Actually, MPLS Data Plane doesnt work in cEOS. You need to try vEOS and be sure you have a ethernet interface in the VRF!!! (Lo or SVI are not enough to bring up properly the VRF at kernetl level - https://eos.arista.com/forum/see-bgp-routes-unable-to-ping/
 
 ```
 r01#bash
