@@ -68,3 +68,8 @@ To-Dos
 This is the network diagram (using https://draw.io)
 
 ![](images/mpls-sr-ceos.png)
+
+
+Example from EVE-NG on GCP using vEOS
+
+[![asciicast](https://asciinema.org/a/l57G2ppeejuslQ2FJl4gu3xNx.svg)](https://asciinema.org/a/l57G2ppeejuslQ2FJl4gu3xNx)
