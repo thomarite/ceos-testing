@@ -1,0 +1,2304 @@
+2020-07-01 18:28:55,743 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:30:55,289 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:31:57,068 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:34:14,751 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:34:31,582 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:45:32,692 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:46:35,510 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:56:59,129 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:56:59,131 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'my_task' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 11, in my_task
+    return task.run(task=netwoking.netmiko_send_command, command_string="show run | grep -i hostame")
+NameError: name 'netwoking' is not defined
+
+2020-07-01 18:56:59,131 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'my_task' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 11, in my_task
+    return task.run(task=netwoking.netmiko_send_command, command_string="show run | grep -i hostame")
+NameError: name 'netwoking' is not defined
+
+2020-07-01 18:56:59,131 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'my_task' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 11, in my_task
+    return task.run(task=netwoking.netmiko_send_command, command_string="show run | grep -i hostame")
+NameError: name 'netwoking' is not defined
+
+2020-07-01 18:57:14,294 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 18:58:09,291 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 19:01:35,689 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 19:02:10,402 -  nornir.core -     INFO -        run() - Running task 'my_task' with args {} on 3 hosts
+2020-07-01 20:10:41,091 -  nornir.core -     INFO -        run() - Running task 'get_hostname' with args {} on 3 hosts
+2020-07-01 20:10:46,562 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:10:46,565 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:10:46,567 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:10:46,567 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fd5b5a2c598> (failed)
+
+
+2020-07-01 20:10:46,575 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fd5b5a2c598> (failed)
+
+
+2020-07-01 20:10:46,584 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:10:46,584 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 17, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7fd5b5a2c6a8> (failed)
+
+
+2020-07-01 20:10:46,585 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:10:46,585 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:11:44,432 -  nornir.core -     INFO -        run() - Running task 'get_hostname' with args {} on 3 hosts
+2020-07-01 20:11:49,895 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:11:49,898 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:11:49,899 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:11:49,905 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f41feffa620> (failed)
+
+
+2020-07-01 20:11:49,908 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f41feffa620> (failed)
+
+
+2020-07-01 20:11:49,915 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:11:49,915 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 17, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f41feffa730> (failed)
+
+
+2020-07-01 20:11:49,916 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:11:49,916 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:12:29,178 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:12:29,180 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:12:29,182 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:12:29,188 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f42f6f8d620> (failed)
+
+
+2020-07-01 20:12:29,189 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f42f6f8d620> (failed)
+
+
+2020-07-01 20:12:29,197 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:12:29,197 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 17, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f42f6f8d730> (failed)
+
+
+2020-07-01 20:12:29,197 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:12:29,198 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:13:32,492 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:13:32,494 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:13:32,494 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:13:32,495 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f3f9fa73620> (failed)
+
+
+2020-07-01 20:13:32,497 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 15, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f3f9fa73620> (failed)
+
+
+2020-07-01 20:13:32,511 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:13:32,512 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 17, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f3f9fa73730> (failed)
+
+
+2020-07-01 20:13:36,435 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:14:16,846 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:15:20,507 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:15:51,832 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:16:22,064 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:17:37,270 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:18:55,329 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:20:56,605 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f864f34a6a8> (failed)
+
+
+2020-07-01 20:21:21,307 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:21:24,616 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:21:30,911 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:21:34,566 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:21:34,566 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:21:34,566 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:20,945 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:24,584 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:22:26,047 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:22:26,770 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+2020-07-01 20:22:26,770 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:26,770 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:45,089 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:45,103 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:22:45,103 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f52333fb730> (failed)
+
+
+2020-07-01 20:22:45,104 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:22:45,104 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f52333fb620> (failed)
+
+
+2020-07-01 20:22:45,104 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:22:45,104 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f52333fb620> (failed)
+
+
+2020-07-01 20:22:45,104 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:45,104 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:47,592 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:47,606 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:22:47,606 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7fefe5c36730> (failed)
+
+
+2020-07-01 20:22:47,607 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:22:47,607 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fefe5c36620> (failed)
+
+
+2020-07-01 20:22:47,607 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:22:47,607 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fefe5c36620> (failed)
+
+
+2020-07-01 20:22:47,607 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:22:47,607 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:24:17,957 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:24:17,975 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-01 20:24:17,976 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7fcfbed7b730> (failed)
+
+
+2020-07-01 20:24:17,976 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-01 20:24:17,977 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fcfbed7b620> (failed)
+
+
+2020-07-01 20:24:17,977 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-01 20:24:17,978 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fcfbed7b620> (failed)
+
+
+2020-07-01 20:24:17,978 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-01 20:24:17,978 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 10:37:36,253 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 10:37:36,288 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-02 10:37:36,289 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f1145c79730> (failed)
+
+
+2020-07-02 10:37:36,289 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-02 10:37:36,290 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f1145c79620> (failed)
+
+
+2020-07-02 10:37:36,290 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-02 10:37:36,290 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 16, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7f1145c79620> (failed)
+
+
+2020-07-02 10:37:36,291 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 10:37:36,291 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 10:40:00,965 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:40:00,993 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/loaders.py", line 127, in load
+    code = environment.compile(source, name, filename)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 638, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 91, in template
+    {% endfor %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endfor'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'endif'. The innermost block that needs to be closed is 'if'.
+
+2020-07-02 10:40:00,993 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7fb4f059e730> (failed)
+
+
+2020-07-02 10:40:00,994 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:40:00,994 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:50:49,063 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:50:49,131 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 18, in render_from_file
+    return t.render(**kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 1, in top-level template code
+    router bgp {{ bgp.asn }}
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'bgp' is undefined
+
+2020-07-02 10:50:49,131 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates")
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7ffaa2e22730> (failed)
+
+
+2020-07-02 10:50:49,132 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:50:49,132 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:53:43,416 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:53:43,493 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 18, in render_from_file
+    return t.render(**kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 26, in top-level template code
+    {% for path in bgp.additional_paths %}
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'additional_paths'
+
+2020-07-02 10:53:43,494 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates", **task.host)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f45aa4466a8> (failed)
+
+
+2020-07-02 10:53:43,494 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:53:43,494 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:55:40,895 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:55:40,961 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 18, in render_from_file
+    return t.render(**kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 70, in top-level template code
+    neighbor {{ peer.name }} timers {{ bgp.timers.keep_alive }} {{bgp.timers.hold }}
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 471, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'timers'
+
+2020-07-02 10:55:40,962 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates", **task.host)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f01440aa6a8> (failed)
+
+
+2020-07-02 10:55:40,962 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:55:40,962 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:58:31,766 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:58:31,833 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'template_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/helpers/jinja_helper.py", line 18, in render_from_file
+    return t.render(**kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/jinja2/_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "./templates/eos-bgp.j2", line 90, in top-level template code
+    neighbor {{ peer.name }} maximum-routes {{ bgp.maximum_routes }}
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'maximum_routes'
+
+2020-07-02 10:58:31,834 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 18, in render_config
+    r = task.run(task=template_file, template=f"{task.host.platform}-{section}.j2", path="./templates", **task.host)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7f542ec746a8> (failed)
+
+
+2020-07-02 10:58:31,834 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:58:31,835 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:59:33,866 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:59:33,929 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 10:59:33,933 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'write_file' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/files/write_file.py", line 55, in write_file
+    with open(filename, mode=mode) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'configs/r1/bgp.txt'
+
+2020-07-02 10:59:33,934 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'write_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 26, in write_config
+    result = task.run(task=files.write_file, filename=filename, content=content)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function write_file at 0x7f970fc97b70> (failed)
+
+
+2020-07-02 10:59:33,934 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:05:50,987 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:05:51,065 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:05:51,066 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'write_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 26, in write_config
+    os.makedirs(directory)
+NameError: name 'directory' is not defined
+
+2020-07-02 11:05:51,066 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:06:17,982 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:06:18,050 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:06:18,051 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:06:20,141 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 286, in _load_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1002]: CLI command 17 of 21 'neighbor AS100-CORE maximum-routes0' failed: invalid command [Invalid input (at token 2: 'maximum-routes0')]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 301, in load_merge_candidate
+    self._load_config(filename, config, False)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 293, in _load_config
+    raise MergeConfigException(msg)
+napalm.base.exceptions.MergeConfigException: Error [1002]: CLI command 17 of 21 'neighbor AS100-CORE maximum-routes0' failed: invalid command [Invalid input (at token 2: 'maximum-routes0')]
+
+2020-07-02 11:06:20,142 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 36, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=True)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f7410686c80> (failed)
+
+
+2020-07-02 11:08:12,452 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:08:12,529 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:08:12,530 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:10:11,862 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:10:11,928 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:10:11,929 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 1 hosts
+2020-07-02 11:14:05,839 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:14:05,920 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r2.yaml'
+
+2020-07-02 11:14:05,921 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 17, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fd88ec99598> (failed)
+
+
+2020-07-02 11:14:05,921 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'load_yaml' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/data/load_yaml.py", line 24, in load_yaml
+    with open(file, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './host_vars/r3.yaml'
+
+2020-07-02 11:14:05,921 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'render_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 17, in render_config
+    data = task.run(task=load_yaml,file=f'./host_vars/{task.host}.yaml')
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function load_yaml at 0x7fd88ec99598> (failed)
+
+
+2020-07-02 11:14:05,922 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:14:05,922 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:15:59,280 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:15:59,482 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:15:59,484 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:41:28,510 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:41:28,610 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:41:28,612 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:04,265 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:04,365 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:04,367 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:15,461 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:15,562 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:15,564 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:23,634 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:23,729 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:23,731 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:46,056 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:46,155 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:50:46,157 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:06,985 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:07,079 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:07,081 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': True} on 3 hosts
+2020-07-02 11:53:14,180 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:14,275 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:14,277 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': True} on 3 hosts
+2020-07-02 11:53:21,604 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:21,712 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:21,714 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 11:53:22,723 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:53:22,724 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7ff9e202e510> (failed)
+
+
+2020-07-02 11:53:23,130 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:53:23,131 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7ff9e202e510> (failed)
+
+
+2020-07-02 11:53:23,185 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:53:23,186 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7ff9e202e510> (failed)
+
+
+2020-07-02 11:53:57,049 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:57,153 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:53:57,155 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 11:53:58,477 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:53:58,477 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f70a1a70510> (failed)
+
+
+2020-07-02 11:53:58,657 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:53:58,657 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f70a1a70510> (failed)
+
+
+2020-07-02 11:53:58,665 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:53:58,666 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f70a1a70510> (failed)
+
+
+2020-07-02 11:54:52,936 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:54:53,039 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 11:54:53,040 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 11:54:54,062 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:54:54,063 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f8f62e1a510> (failed)
+
+
+2020-07-02 11:54:54,380 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:54:54,381 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f8f62e1a510> (failed)
+
+
+2020-07-02 11:54:54,429 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 11:54:54,430 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f8f62e1a510> (failed)
+
+
+2020-07-02 12:17:35,247 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:17:35,370 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:17:35,372 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 12:17:35,755 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 286, in _load_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1002]: CLI command 23 of 28 'neighbor encapsulation mpls next-hop-self source-interface Loopback1' failed: invalid command [Invalid input (at token 2: 'mpls')]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 301, in load_merge_candidate
+    self._load_config(filename, config, False)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 293, in _load_config
+    raise MergeConfigException(msg)
+napalm.base.exceptions.MergeConfigException: Error [1002]: CLI command 23 of 28 'neighbor encapsulation mpls next-hop-self source-interface Loopback1' failed: invalid command [Invalid input (at token 2: 'mpls')]
+
+2020-07-02 12:17:35,756 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f176321d510> (failed)
+
+
+2020-07-02 12:17:35,765 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 286, in _load_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1002]: CLI command 23 of 28 'neighbor encapsulation mpls next-hop-self source-interface Loopback1' failed: invalid command [Invalid input (at token 2: 'mpls')]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 301, in load_merge_candidate
+    self._load_config(filename, config, False)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 293, in _load_config
+    raise MergeConfigException(msg)
+napalm.base.exceptions.MergeConfigException: Error [1002]: CLI command 23 of 28 'neighbor encapsulation mpls next-hop-self source-interface Loopback1' failed: invalid command [Invalid input (at token 2: 'mpls')]
+
+2020-07-02 12:17:35,766 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f176321d510> (failed)
+
+
+2020-07-02 12:17:35,782 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 286, in _load_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1002]: CLI command 23 of 28 'neighbor encapsulation mpls next-hop-self source-interface Loopback1' failed: invalid command [Invalid input (at token 2: 'mpls')]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 301, in load_merge_candidate
+    self._load_config(filename, config, False)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 293, in _load_config
+    raise MergeConfigException(msg)
+napalm.base.exceptions.MergeConfigException: Error [1002]: CLI command 23 of 28 'neighbor encapsulation mpls next-hop-self source-interface Loopback1' failed: invalid command [Invalid input (at token 2: 'mpls')]
+
+2020-07-02 12:17:35,782 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f176321d510> (failed)
+
+
+2020-07-02 12:18:54,131 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:18:54,262 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:18:54,264 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 12:18:55,318 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:18:55,318 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f73fc8d9510> (failed)
+
+
+2020-07-02 12:18:55,765 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:18:55,766 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f73fc8d9510> (failed)
+
+
+2020-07-02 12:18:55,776 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:18:55,776 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f73fc8d9510> (failed)
+
+
+2020-07-02 12:26:37,381 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:26:37,509 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:26:37,511 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 12:26:38,612 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:26:38,613 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f66b5cad510> (failed)
+
+
+2020-07-02 12:26:38,904 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:26:38,905 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f66b5cad510> (failed)
+
+
+2020-07-02 12:26:38,946 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:26:38,947 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f66b5cad510> (failed)
+
+
+2020-07-02 12:30:48,060 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:30:48,171 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:30:48,173 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 12:30:49,207 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:30:49,208 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f43cc983510> (failed)
+
+
+2020-07-02 12:30:49,511 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:30:49,512 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f43cc983510> (failed)
+
+
+2020-07-02 12:30:49,562 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:30:49,562 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f43cc983510> (failed)
+
+
+2020-07-02 12:32:18,679 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:32:18,787 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:32:18,789 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': None} on 3 hosts
+2020-07-02 12:32:19,804 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:32:19,804 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f6c1d3cf510> (failed)
+
+
+2020-07-02 12:32:20,133 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:32:20,134 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f6c1d3cf510> (failed)
+
+
+2020-07-02 12:32:20,155 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:32:20,155 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f6c1d3cf510> (failed)
+
+
+2020-07-02 12:34:50,077 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:34:50,197 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:34:50,199 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:35:28,287 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:35:28,421 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:35:28,423 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:36:09,683 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:36:09,802 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 12:36:09,805 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 12:36:10,961 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:36:10,962 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f7cd3716510> (failed)
+
+
+2020-07-02 12:36:11,052 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:36:11,052 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f7cd3716510> (failed)
+
+
+2020-07-02 12:36:11,204 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 12:36:11,205 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f7cd3716510> (failed)
+
+
+2020-07-02 16:22:49,465 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:22:49,762 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:22:49,873 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': True} on 3 hosts
+2020-07-02 16:23:00,505 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:23:00,787 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:23:00,896 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 16:23:03,890 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/eos.py", line 340, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/pyeapi_syntax_wrapper.py", line 42, in run_commands
+    return super(Node, self).run_commands(commands, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/client.py", line 730, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 499, in execute
+    response = self.send(request)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 418, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 16:23:03,891 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 124, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: napalm_configure (failed)
+
+
+2020-07-02 16:23:03,937 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/eos.py", line 340, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/pyeapi_syntax_wrapper.py", line 42, in run_commands
+    return super(Node, self).run_commands(commands, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/client.py", line 730, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 499, in execute
+    response = self.send(request)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 418, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 16:23:03,937 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 124, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: napalm_configure (failed)
+
+
+2020-07-02 16:23:04,114 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/eos.py", line 340, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/pyeapi_syntax_wrapper.py", line 42, in run_commands
+    return super(Node, self).run_commands(commands, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/client.py", line 730, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 499, in execute
+    response = self.send(request)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 418, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 2 of 5 'copy startup-config flash:rollback-0' failed: could not run command [Error copying flash:/startup-config to flash:rollback-0 (Permission denied)]
+
+2020-07-02 16:23:04,114 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 124, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: napalm_configure (failed)
+
+
+2020-07-02 16:49:19,639 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:49:19,946 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:49:20,056 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 16:49:23,161 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/eos.py", line 340, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/pyeapi_syntax_wrapper.py", line 42, in run_commands
+    return super(Node, self).run_commands(commands, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/client.py", line 730, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 499, in execute
+    response = self.send(request)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 418, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 16:49:23,162 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 124, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: napalm_configure (failed)
+
+
+2020-07-02 16:49:23,504 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/eos.py", line 340, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/pyeapi_syntax_wrapper.py", line 42, in run_commands
+    return super(Node, self).run_commands(commands, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/client.py", line 730, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 499, in execute
+    response = self.send(request)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 418, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 16:49:23,505 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 124, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: napalm_configure (failed)
+
+
+2020-07-02 16:49:23,695 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/eos.py", line 340, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/napalm/eos/pyeapi_syntax_wrapper.py", line 42, in run_commands
+    return super(Node, self).run_commands(commands, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/client.py", line 730, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 499, in execute
+    response = self.send(request)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/pyeapi/eapilib.py", line 418, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 16:49:23,696 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 67, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 55, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/.pyenv/versions/3.7.3/lib/python3.7/site-packages/nornir/core/task.py", line 124, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: napalm_configure (failed)
+
+
+2020-07-02 16:59:27,427 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:59:27,669 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:59:27,672 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 16:59:44,173 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:59:44,419 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 16:59:44,422 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 17:04:06,708 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:04:06,961 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:04:06,965 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 17:04:28,670 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:04:28,919 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:04:28,922 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 17:04:49,709 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:04:49,951 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:04:49,954 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 17:09:34,755 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:09:34,987 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:09:34,992 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 17:14:48,273 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:14:48,525 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:14:48,528 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 17:43:50,766 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:43:51,015 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:43:51,019 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': True} on 3 hosts
+2020-07-02 17:45:09,678 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:45:09,922 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 17:45:09,925 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': True} on 3 hosts
+2020-07-02 17:46:03,109 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:46:03,180 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:46:03,183 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': True} on 3 hosts
+2020-07-02 17:48:19,385 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:48:19,458 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:48:19,461 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': True} on 3 hosts
+2020-07-02 17:49:09,682 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:49:09,758 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:49:09,762 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': True} on 3 hosts
+2020-07-02 17:50:15,725 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:50:15,796 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:50:15,800 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': True} on 3 hosts
+2020-07-02 17:53:04,813 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:53:04,878 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:53:04,881 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': True} on 3 hosts
+2020-07-02 17:53:35,705 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:53:35,779 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 17:53:35,781 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 17:53:38,458 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 4 of 5 'commit' failed: could not run command [Error copying system:/running-config to checkpoint:ckp-20200702-1 (Permission denied)]
+
+2020-07-02 17:53:38,458 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 56, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7fd146b49510> (failed)
+
+
+2020-07-02 18:00:53,181 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:00:53,254 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:00:53,257 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 18:00:56,442 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 18:00:56,442 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 56, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f7fa8144510> (failed)
+
+
+2020-07-02 18:20:54,001 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 18:20:54,245 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 18:20:54,248 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': True} on 3 hosts
+2020-07-02 18:21:23,420 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 18:21:23,672 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'bgp'} on 3 hosts
+2020-07-02 18:21:23,675 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'bgp', 'dry_run': False} on 3 hosts
+2020-07-02 18:22:37,971 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:22:38,040 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:22:38,043 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 18:22:40,632 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 18:22:40,633 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 56, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f059a39c510> (failed)
+
+
+2020-07-02 18:24:41,811 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:24:41,879 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:24:41,882 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 18:24:45,079 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 18:24:45,079 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 56, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7fc857b0f510> (failed)
+
+
+2020-07-02 18:25:10,765 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:25:10,845 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:25:10,848 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 18:26:16,787 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:26:16,861 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:26:16,864 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 18:26:20,129 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 18:26:20,130 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 56, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f6e2b642510> (failed)
+
+
+2020-07-02 18:27:13,690 -  nornir.core -     INFO -        run() - Running task 'render_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:27:13,764 -  nornir.core -     INFO -        run() - Running task 'write_config' with args {'section': 'isis'} on 3 hosts
+2020-07-02 18:27:13,768 -  nornir.core -     INFO -        run() - Running task 'deploy_config' with args {'section': 'isis', 'dry_run': False} on 3 hosts
+2020-07-02 18:27:17,026 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_configure' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 37, in napalm_configure
+    device.commit_config()
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/napalm/eos/eos.py", line 331, in commit_config
+    self.device.run_commands(commands)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/client.py", line 743, in run_commands
+    response = self._connection.execute(commands, encoding, **kwargs)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 550, in execute
+    response = self.send(request)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/pyeapi/eapilib.py", line 469, in send
+    raise CommandError(code, msg, command_error=err, output=out)
+pyeapi.eapilib.CommandError: Error [1000]: CLI command 5 of 5 'write memory' failed: could not run command [Error copying system:/running-config to flash:/startup-config (Operation not permitted)]
+
+2020-07-02 18:27:17,026 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'deploy_config' failed with traceback:
+Traceback (most recent call last):
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "buid-config.py", line 56, in deploy_config
+    result = task.run(task=networking.napalm_configure, configuration=cfg, dry_run=dry_run)
+  File "/home/tomas/storage/technology/arista/testdir2/lib/python3.7/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f22cbddf510> (failed)
+
+

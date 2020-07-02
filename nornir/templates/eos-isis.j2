@@ -1,0 +1,43 @@
+router isis {{ isis.name }}
+{% if isis.net is defined %}
+   net {{ isis.net }}
+{% endif %}
+{% if isis.level is defined %}
+   is-type {{ isis.level }}
+{% endif %}
+{% if isis.log_adj is defined and isis.log_adj == "yes" %}
+   log-adjacency-changes
+{% else %}
+   no log-adjacency-changes
+{% endif %}
+{% if isis.overload_bit is defined %}
+   set-overload-bit {{ isis.overload_bit }}
+{% endif %}
+{# 
+ISIS ADDRESS FAMILY CONFIG
+#}
+{% if isis.address_family is defined %}
+{% for af in isis.address_family %}
+   !
+   address-family {{ af.name }}
+{% if af.bfd is defined  %}
+     bfd {{ af.bfd }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{# 
+ISIS SR CONFIG
+#}
+{% if isis.sr is defined %}
+   !
+   segment-routing mpls
+{% if isis.sr.router_id is defined  %}
+     router-id {{ isis.sr.router_id }}
+{% endif %}
+{% if isis.sr.shutdown is defined and isis.sr.shutdown == "no" %}
+     no shutdown
+{% else %}
+     shutdown
+{% endif %}
+{% endif %}
+!

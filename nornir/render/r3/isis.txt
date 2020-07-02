@@ -1,0 +1,13 @@
+router isis CORE
+   net 49.0000.0001.0010.0000.0000.0003.00
+   is-type level-2
+   log-adjacency-changes
+   set-overload-bit on-startup wait-for-bgp timeout 180
+   !
+   address-family ipv4 unicast
+     bfd all-interfaces
+   !
+   segment-routing mpls
+     router-id 10.0.0.3
+     no shutdown
+!

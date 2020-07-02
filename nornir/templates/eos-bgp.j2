@@ -1,0 +1,159 @@
+router bgp {{ bgp.asn }}
+{% if bgp.router_id is defined %}
+   router-id {{ bgp.router_id }}
+{% endif %}
+{% if bgp.graceful_restart is defined %}
+   graceful-restart {{ bgp.graceful_restart }}
+   graceful-restart
+{% endif %}
+{% if bgp.maximum_paths is defined %}
+   maximum-paths {{ bgp.maximum_paths }}
+{% endif %}
+{# 
+BGP PEEERS GROUP
+#}
+{% if bgp.groups is defined %}
+{% for group in bgp.groups %}
+   neighbor {{ group.name }} peer group
+   neighbor {{ group.name }} remote-as {{ group.asn }}
+{% if group.next_hop_self is defined %}
+   neighbor {{ group.name }} next-hop-self
+{% endif %}
+{% if group.update_source is defined %}
+   neighbor {{ group.name }} update-source {{ group.update_source }}
+{% endif %}
+{% if group.timers is defined %}
+   neighbor {{ group.name }} timers {{ group.timers.hello }} {{ group.timers.hold }}
+{% endif %}
+{% if group.additional_paths is defined %}
+{% for path in group.additional_paths %}
+   neighbor {{ group.name }} additional-paths {{ path }}
+{% endfor %}
+{% endif %}
+{% if group.password is defined %}
+   neighbor {{ group.name }} password {{ group.password }}
+{% endif %}
+{% if group.send_community is defined %}
+   neighbor {{ group.name }} send-community {{ group.send_community }}
+{% endif %}
+{% if group.maximum_routes is defined %}
+   neighbor {{ group.name }} maximum-routes {{ group.maximum_routes }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{# 
+BGP NEIGHBORS CONFIG
+#}
+{% if bgp.neighbors is defined %}
+{% for peer in bgp.neighbors %}
+{% if peer.delete is defined and peer.delete == "yes" %}
+   no neighbor {{ peer.name }}
+{% else %}
+{% if peer.group is defined  %}
+   neighbor {{ peer.name }} peer group {{ peer.group }}
+{% endif %}
+{% if peer.remote_as is defined  %}
+   neighbor {{ peer.name }} remote-as {{ peer.remote_as }}
+{% endif %}
+{% if peer.next_hop_self is defined and peer.next_hop_self == "yes" %}
+   neighbor {{ peer.name }} next-hop-self
+{% endif %}
+{% if peer.ttl_max is defined  %}
+   neighbor {{ peer.name }} ttl maximum-hops {{ peer.ttl_max }}
+{% endif %}
+{% if peer.update_source is defined %}
+   neighbor {{ peer.name }} update-source {{ peer.update_source }}
+{% endif %}
+{% if peer.description is defined %}
+   neighbor {{ peer.name }} description {{ peer.description }}
+{% endif %}
+{% if peer.ebgp_multihop is defined %}
+   neighbor {{ peer.name }} ebgp-multihop {{ peer.ebgp_multihop }}
+{% endif %}
+{% if peer.timers is defined %}
+   neighbor {{ peer.name }} timers {{ peer.timers.keep_alive }} {{peer.timers.hold }}
+{% elif bgp.timers is defined %}
+   neighbor {{ peer.name }} timers {{ bgp.timers.keep_alive }} {{bgp.timers.hold }}
+{% endif %}
+{% if peer.route_map_in is defined %}
+   neighbor {{ peer.name }} route-map {{ peer.route_map_in }} in
+{% endif %}
+{% if peer.route_map_out is defined %}
+   neighbor {{ peer.name }} route-map {{ peer.route_map_out }} out
+{% endif %}
+{% if peer.password is defined %}
+   neighbor {{ peer.name }} password {{ peer.password }}
+{% endif %}
+{% if peer.send_community is defined %}
+   neighbor {{ peer.name }} send-community {{ peer.send_community }}
+{% endif %}
+{% if peer.enforce_first_as is defined and peer.enforce_first_as == "no" %}
+   no neighbor {{ peer.name }} enforce-first-as
+{% endif %}
+{% if peer.maximum_routes is defined %}
+   neighbor {{ peer.name }} maximum-routes {{ peer.maximum_routes }}
+{% elif bgp.maximum_routes is defined %}
+   neighbor {{ peer.name }} maximum-routes {{ bgp.maximum_routes }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{# 
+BGP ADDRESS FAMILY CONFIG
+#}
+{% if bgp.address_family is defined %}
+{% for af in bgp.address_family %}
+   !
+   address-family {{ af.name }}
+{% if af.default is defined  %}
+     neighbor default {{ af.default }}
+{% endif %}
+{% if af.neighbors is defined %}
+{% for n in af.neighbors %}
+     neighbor {{ n.name }} {{ n.status }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{# 
+BGP VRF CONFIG
+#}
+{% if bgp.vrf is defined %}
+{% for vrf in bgp.vrf %}
+   !
+   vrf {{ vrf.name }}
+{% if vrf.rd is defined  %}
+     rd {{ vrf.rd }}
+{% endif %}
+{% if vrf.route_target is defined  %}
+{% if vrf.route_target.import is defined  %}
+     route-target import {{ vrf.route_target.import }}
+{% endif %}
+{% if vrf.route_target.export is defined  %}
+     route-target export {{ vrf.route_target.export }}
+{% endif %}
+{% endif %}
+{% if vrf.network is defined %}
+{% for net in vrf.network %}
+     network {{ net }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{# 
+BGP DEFAULT NETWORK CONFIG
+#}
+{% if bgp.networks is defined %}
+{% for net in bgp.networks %}
+   network {{ net.prefix }}/{{ net.prefixlen }}
+{% endfor %}
+{% endif %}
+{# 
+BGP DEFAULT REDISTRIBUTION CONFIG
+#}
+{% if bgp.redistribute is defined %}
+{% for redis in bgp.redistribute %}
+   redistribute {{ redis }}
+{% endfor %}
+{% endif %}
+!

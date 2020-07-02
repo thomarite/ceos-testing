@@ -1,0 +1,56 @@
+---
+bgp:
+  asn: 100
+  router_id: "10.0.0.1"
+  maximum_paths: 2
+  graceful_restart: "restart-time 300"
+  groups:
+    - name: "AS100-CORE"
+      asn: 100
+      next_hop_self: True
+      update_source: "Loopback1"
+      timers:
+        hello: 2
+        hold: 6
+      additional_paths:
+        - "receive"
+        - "send any"
+      password: "mpls-sr"
+      send_community: "standard extended"
+      maximum_routes: 0
+  neighbors:
+    - name: "10.0.0.2"
+      group: "AS100-CORE"
+      description: "R02"
+    - name: "10.0.0.3"
+      group: "AS100-CORE"
+      description: "R03"
+  address_family:
+    - name: "evpn"
+      default: "encapsulation mpls next-hop-self source-interface Loopback1"
+      neighbors:
+        - name: "10.0.0.2"
+          status: "activate"
+        - name: "10.0.0.3"
+          status: "activate"
+  vrf:
+    - name: "CUST-A"
+      rd: "100:1"
+      route_target:
+        import: "evpn 100:1"
+        export: "evpn 100:1"
+      network:
+        - "192.168.0.1/32"
+
+isis:
+  name: "CORE"
+  net: "49.0000.0001.0010.0000.0000.0001.00"
+  level: "level-2"
+  log_adj: "yes"
+  overload_bit: "on-startup wait-for-bgp timeout 180"
+  address_family:
+    - name: "ipv4 unicast"
+      bfd: "all-interfaces"
+  sr:
+    router_id: "10.0.0.1"
+    shutdown: "no"

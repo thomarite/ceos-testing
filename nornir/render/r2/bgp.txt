@@ -1,0 +1,31 @@
+router bgp 100
+   router-id 10.0.0.2
+   graceful-restart restart-time 300
+   graceful-restart
+   maximum-paths 2
+   neighbor AS100-CORE peer group
+   neighbor AS100-CORE remote-as 100
+   neighbor AS100-CORE next-hop-self
+   neighbor AS100-CORE update-source Loopback1
+   neighbor AS100-CORE timers 2 6
+   neighbor AS100-CORE additional-paths receive
+   neighbor AS100-CORE additional-paths send any
+   neighbor AS100-CORE password mpls-sr
+   neighbor AS100-CORE send-community standard extended
+   neighbor AS100-CORE maximum-routes 0
+   neighbor 10.0.0.1 peer group AS100-CORE
+   neighbor 10.0.0.1 description R01
+   neighbor 10.0.0.3 peer group AS100-CORE
+   neighbor 10.0.0.3 description R03
+   !
+   address-family evpn
+     neighbor default encapsulation mpls next-hop-self source-interface Loopback1
+     neighbor 10.0.0.1 activate
+     neighbor 10.0.0.3 activate
+   !
+   vrf CUST-A
+     rd 100:1
+     route-target import evpn 100:1
+     route-target export evpn 100:1
+     network 192.168.0.2/32
+!

@@ -1,0 +1,49 @@
+---
+r1:
+  hostname: 0.0.0.0
+  groups:
+    - eos
+  connection_options:
+    netmiko:
+      platform: arista_eos
+      port: 2000
+      extras: {}
+        # secret: xxx
+        # global_delay_factor: 5
+        # ssh_config_file: "/xx/xx/file"
+        # any "ConnectHandler" args
+    napalm:
+      platform: eos
+      port: 9000
+      extras:
+        optional_args: {}
+
+r2:
+  hostname: 0.0.0.0
+  groups:
+    - eos
+  connection_options:
+    netmiko:
+      platform: arista_eos
+      port: 2001
+      extras: {}
+    napalm:
+      platform: eos
+      port: 9001
+      extras:
+        optional_args: {}
+
+r3:
+  hostname: 0.0.0.0
+  groups:
+    - eos
+  connection_options:
+    netmiko:
+      platform: arista_eos
+      port: 2002
+      extras: {}
+    napalm:
+      platform: eos
+      port: 9002
+      extras:
+        optional_args: {}
