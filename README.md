@@ -72,4 +72,4 @@ This is the network diagram (using https://draw.io)
 
 Example from EVE-NG on GCP using vEOS
 
-[![asciicast](https://asciinema.org/a/l57G2ppeejuslQ2FJl4gu3xNx.svg)](https://asciinema.org/a/l57G2ppeejuslQ2FJl4gu3xNx)
+[![asciicast](https://asciinema.org/a/Dk1PAxDBamzQMechaOWbN5NV9.svg)](https://asciinema.org/a/l57G2ppeejuslQ2FJl4gu3xNx)
