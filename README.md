@@ -139,6 +139,18 @@ changed: False
 diff:
 ```
 
+# cEOS - docker - Napalm/Nornir Issue
+
+I am using cEOS that is a container controlled via docker.
+Nornir uses Napalm to connect to the cEOS containers
+As cEOS containers relay on my laptop OS and filesystem, there are some commands that fail. It is not a napalm/norninr issue, it is a just a permissions issue between the container and my FS.
+
+I need this hack to be able to write in /mnt/flash although it still throws an error when writing to startup-config (but it writes...)
+
+```
+docker# chmod o+w zfs/graph/*/mnt/flash/.checkpoints
+docker# chmod o+w zfs/graph/*/mnt/flash  --> I can write on /mnt/flash needed for napalm-commit
+```
 
 # To-Do
 
