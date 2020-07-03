@@ -1,0 +1,148 @@
+! device: r3 (vEOS, EOS-4.23.3M)
+!
+! boot system flash:/vEOS-lab.swi
+!
+alias delta bash rm /.deltas/var/tmp/agents/core.*
+alias df bash df -hT
+alias sri show run | grep -i
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname r3
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+username api privilege 15 secret sha512 $6$IMXFhZ.81w97youv$I8bQKFnKZhmFSEPgyuux9Viy3lRTPzCz.aUMG1L3Vkps8Sat46Dzj0r92gnfxa97rWxRGZM.zubbDVnGFIT6n1
+username tomas privilege 15 secret sha512 $6$/2byyy3zSRmZ0XZl$mUXal0o.pfFsnmdcTram9LB.6tIIDivR6qvmEn9fiqU0XkQtuWxtxEM8NBEfsfjj2A4/esNfhaXKghpCGWXOF.
+!
+vrf instance CUST-A
+   rd 100:1
+!
+vrf instance MGMT
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.13.2/30
+   pim ipv4 sparse-mode
+   isis enable CORE
+   isis metric 50
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.23.2/30
+   pim ipv4 sparse-mode
+   isis enable CORE
+   isis metric 50
+   isis network point-to-point
+!
+interface Ethernet3
+   no switchport
+   vrf CUST-A
+   ip address 10.3.0.1/30
+!
+interface Ethernet4
+   description C-A
+   no switchport
+   vrf CUST-A
+   ip address 192.168.3.1/30
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   description CORE Loopback
+   ip address 10.0.0.3/32
+   node-segment ipv4 index 3
+   isis enable CORE
+   isis metric 1
+!
+interface Loopback2
+   vrf CUST-A
+   ip address 192.168.0.3/32
+!
+interface Management1
+   vrf MGMT
+   ip address 192.168.249.6/24
+!
+ip routing
+ip routing vrf CUST-A
+ip routing vrf MGMT
+!
+ip route vrf MGMT 0.0.0.0/0 192.168.249.1
+!
+mpls ip
+!
+mpls label range isis-sr 800000 65536
+!
+router bgp 100
+   router-id 10.0.0.3
+   graceful-restart restart-time 300
+   graceful-restart
+   maximum-paths 2
+   neighbor AS100-CORE peer group
+   neighbor AS100-CORE remote-as 100
+   neighbor AS100-CORE next-hop-self
+   neighbor AS100-CORE update-source Loopback1
+   neighbor AS100-CORE timers 2 6
+   neighbor AS100-CORE additional-paths receive
+   neighbor AS100-CORE additional-paths send any
+   neighbor AS100-CORE password 7 Nmg+xbfVkywN7BBIllK5yw==
+   neighbor AS100-CORE send-community standard extended
+   neighbor AS100-CORE maximum-routes 0
+   neighbor 10.0.0.1 peer group AS100-CORE
+   neighbor 10.0.0.1 description R01
+   neighbor 10.0.0.2 peer group AS100-CORE
+   neighbor 10.0.0.2 description R02
+   !
+   address-family evpn
+      neighbor default encapsulation mpls next-hop-self source-interface Loopback1
+      neighbor 10.0.0.1 activate
+      neighbor 10.0.0.2 activate
+   !
+   vrf CUST-A
+      rd 100:1
+      route-target import evpn 100:1
+      route-target export evpn 100:1
+      neighbor 192.168.3.2 remote-as 65000
+      neighbor 192.168.3.2 timers 10 30
+      neighbor 192.168.3.2 maximum-routes 10
+      network 10.3.0.0/30
+      network 192.168.0.3/32
+!
+router isis CORE
+   net 49.0000.0001.0010.0000.0000.0003.00
+   is-type level-2
+   log-adjacency-changes
+   set-overload-bit on-startup wait-for-bgp timeout 180
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.0.0.3
+      no shutdown
+!
+router multicast
+   ipv4
+      routing
+!
+management api http-commands
+   protocol unix-socket
+   no shutdown
+   !
+   vrf MGMT
+      no shutdown
+!
+end

@@ -1,0 +1,151 @@
+!
+upgrade fpd auto
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname r4
+!
+boot-start-marker
+boot-end-marker
+!
+vrf definition MGMT
+ rd 100:2
+ route-target export 100:2
+ route-target import 100:2
+ !
+ address-family ipv4
+ exit-address-family
+!
+logging message-counter syslog
+enable secret 5 $1$pK5P$Sk2HNpLteuiAbP.wDE4ny.
+!
+aaa new-model
+!
+!
+!         
+!
+aaa session-id common
+ip source-route
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.com
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!         
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+username tomas privilege 15 secret 5 $1$C.RN$M01JbuEHTV5HwC67LPabp1
+archive
+ log config
+  hidekeys
+! 
+!
+!
+!
+!
+ip ssh time-out 60
+ip ssh version 2
+!
+!         
+!
+!
+interface Loopback0
+ ip address 192.168.33.1 255.255.255.255
+!
+interface FastEthernet0/0
+ description R3-PE
+ ip address 192.168.3.2 255.255.255.252
+ duplex half
+!
+interface FastEthernet1/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet2/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet3/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet4/0
+ vrf forwarding MGMT
+ ip address 192.168.249.8 255.255.255.0
+ duplex half
+!
+router bgp 65000
+ no synchronization
+ bgp log-neighbor-changes
+ network 192.168.33.1 mask 255.255.255.255
+ neighbor 192.168.3.1 remote-as 100
+ neighbor 192.168.3.1 send-community both
+ neighbor 192.168.3.1 route-map RM-PE-IN in
+ neighbor 192.168.3.1 route-map RM-PE-OUT out
+ no auto-summary
+!
+ip forward-protocol nd
+ip route vrf MGMT 0.0.0.0 0.0.0.0 192.168.249.1
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+ip prefix-list PL-ADV-PE seq 5 permit 192.168.33.1/32
+!
+!
+!
+!
+route-map RM-PE-OUT permit 10
+ match ip address prefix-list PL-ADV-PE
+ set community 80877102 additive
+!
+route-map RM-PE-OUT deny 200
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+alias exec sri show run | i 
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ transport input ssh
+!
+end

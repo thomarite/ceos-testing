@@ -1,0 +1,164 @@
+!
+upgrade fpd auto
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname r5
+!
+boot-start-marker
+boot-end-marker
+!         
+vrf definition MGMT
+ rd 100:2
+ route-target export 100:2
+ route-target import 100:2
+ !
+ address-family ipv4
+ exit-address-family
+!
+logging message-counter syslog
+enable secret 5 $1$pK5P$Sk2HNpLteuiAbP.wDE4ny.
+!
+aaa new-model
+!         
+!
+!
+!
+aaa session-id common
+ip source-route
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.com
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+username tomas privilege 15 secret 5 $1$C.RN$M01JbuEHTV5HwC67LPabp1
+archive
+ log config
+  hidekeys
+! 
+!
+!
+!         
+!
+ip ssh time-out 60
+ip ssh version 2
+!
+!
+!
+!
+interface Loopback0
+ ip address 192.168.11.1 255.255.255.255
+!
+interface FastEthernet0/0
+ description R1-PE
+ ip address 192.168.1.2 255.255.255.252
+ duplex half
+!
+interface FastEthernet1/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet2/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet3/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet4/0
+ vrf forwarding MGMT
+ ip address 192.168.249.9 255.255.255.0
+ duplex half
+!
+interface FastEthernet5/0
+ no ip address
+ shutdown
+ duplex half
+!
+interface FastEthernet6/0
+ no ip address
+ shutdown
+ duplex half
+!
+router bgp 65001
+ no synchronization
+ bgp log-neighbor-changes
+ neighbor 192.168.1.1 remote-as 100
+ neighbor 192.168.1.1 send-community both
+ neighbor 192.168.1.1 soft-reconfiguration inbound
+ neighbor 192.168.1.1 route-map RM-PE-IN in
+ neighbor 192.168.1.1 route-map RM-PE-OUT out
+ no auto-summary
+!
+ip forward-protocol nd
+ip route vrf MGMT 0.0.0.0 0.0.0.0 192.168.249.1
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+ip prefix-list PL-ACCEPT-PE seq 5 permit 192.168.33.1/32
+!         
+ip prefix-list PL-ADV-PE seq 5 permit 192.168.11.1/32
+!
+!
+!
+!
+route-map RM-PE-IN permit 10
+ match ip address prefix-list PL-ACCEPT-PE
+!
+route-map RM-PE-IN deny 100
+!
+route-map RM-PE-OUT deny 200
+!
+!         
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+alias exec sri show run | i 
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ transport input ssh
+!
+end

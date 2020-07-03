@@ -1,0 +1,161 @@
+! device: r1 (vEOS, EOS-4.23.3M)
+!
+! boot system flash:/vEOS-lab.swi
+!
+alias delta bash rm /.deltas/var/tmp/agents/core.*
+alias df bash df -hT
+alias sri show run | grep -i
+!
+schedule bgp-check interval 3 timeout 1 max-log-files 10 command bash python /mnt/flash/bgp-check.py
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname r1
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+username api privilege 15 secret sha512 $6$3Htsc9oPwFNQOSoU$QuEno.3DQpaECNiDX4atoN7VxTlBT3rRkyoBhzXVW267Ev/bgejbbCdHAbYtzuQJa.83b8StbfYVZH1EIwTbX.
+username tomas privilege 15 secret sha512 $6$roFypIjAy/1T3G9p$C/J00Kqnus0kJfBplLQz0fip7ylCuV3EWwo.oq16BWG3PgbcqbBxSMyysjlKxmNybzQuVTTcAeohYAd1b6gPj0
+!
+vrf instance CUST-A
+   rd 100:1
+!
+vrf instance MGMT
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.12.1/30
+   pim ipv4 sparse-mode
+   isis enable CORE
+   isis metric 50
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.13.1/30
+   pim ipv4 sparse-mode
+   isis enable CORE
+   isis metric 50
+   isis network point-to-point
+!
+interface Ethernet3
+   description CPE-R5
+   no switchport
+   vrf CUST-A
+   ip address 192.168.1.1/30
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   description CORE Loopback
+   ip address 10.0.0.1/32
+   node-segment ipv4 index 1
+   isis enable CORE
+   isis metric 1
+!
+interface Loopback2
+   vrf CUST-A
+   ip address 192.168.0.1/32
+!
+interface Management1
+   vrf MGMT
+   ip address 192.168.249.4/24
+!
+ip access-list eapiExample
+   10 permit ip any any
+!
+ip routing
+ip routing vrf CUST-A
+ip routing vrf MGMT
+!
+ip prefix-list PL-ADV-R5 seq 10 permit 192.168.33.1/32
+!
+ip route vrf MGMT 0.0.0.0/0 192.168.249.1
+!
+mpls ip
+!
+mpls label range isis-sr 800000 65536
+!
+route-map RM-R5-IN deny 100
+!
+route-map RM-R5-OUT permit 10
+   match ip address prefix-list PL-ADV-R5
+!
+route-map RM-R5-OUT deny 100
+!
+router bgp 100
+   router-id 10.0.0.1
+   graceful-restart restart-time 300
+   graceful-restart
+   maximum-paths 2
+   neighbor AS100-CORE peer group
+   neighbor AS100-CORE remote-as 100
+   neighbor AS100-CORE next-hop-self
+   neighbor AS100-CORE update-source Loopback1
+   neighbor AS100-CORE timers 2 6
+   neighbor AS100-CORE additional-paths receive
+   neighbor AS100-CORE additional-paths send any
+   neighbor AS100-CORE password 7 Nmg+xbfVkywN7BBIllK5yw==
+   neighbor AS100-CORE send-community standard extended
+   neighbor AS100-CORE maximum-routes 0
+   neighbor 10.0.0.2 peer group AS100-CORE
+   neighbor 10.0.0.2 description R02
+   neighbor 10.0.0.3 peer group AS100-CORE
+   neighbor 10.0.0.3 description R03
+   !
+   address-family evpn
+      neighbor default encapsulation mpls next-hop-self source-interface Loopback1
+      neighbor 10.0.0.2 activate
+      neighbor 10.0.0.3 activate
+   !
+   vrf CUST-A
+      rd 100:1
+      route-target import evpn 100:1
+      routeJul  2 13:50:12 r1 Bgp: %BGP-3-NOTIFICATION: sent to neighbor 192.168.1.2 (VRF CUST-A AS 65001) 2/2 (Open Message Error/bad AS number) 0 bytes
+-target export evpn 100:1
+      neighbor 192.168.1.2 remote-as 65001
+      neighbor 192.168.1.2 route-map RM-R5-IN in
+      neighbor 192.168.1.2 route-map RM-R5-OUT out
+      neighbor 192.168.1.2 maximum-routes 10
+      network 10.1.0.0/30
+      network 192.168.0.1/32
+!
+router isis CORE
+   net 49.0000.0001.0010.0000.0000.0001.00
+   is-type level-2
+   log-adjacency-changes
+   set-overload-bit on-startup wait-for-bgp timeout 180
+   !
+   address-family ipv4 unicast
+      bfd all-interfaces
+   !
+   segment-routing mpls
+      router-id 10.0.0.1
+      no shutdown
+!
+router multicast
+   ipv4
+      routing
+!
+management api http-commands
+   protocol unix-socket
+   no shutdown
+   !
+   vrf MGMT
+      no shutdown
+!
+end
