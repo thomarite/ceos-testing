@@ -49,6 +49,8 @@ My laptop is running Debian 10 Testing, Intel i7 and 8GB RAM. It struggles a bit
 
 Most of the topologies are MPLS Segment Routing using ISIS as IGP and EVPN for providing a L2/3 VPN.
 
+More details: https://blog.thomarite.uk/index.php/2020/05/25/mpls-segment-routing-arista-lab/
+
 # Issues
 
  - Need to disable all PIM processes ==> constant cores  -> can't run config, save config etc
@@ -162,9 +164,18 @@ To-Dos
  - test ZTP
  - add some alpine linux boxes to simulate customers, etc.
 
-This is the network diagram (using https://draw.io)
+# Diagrams
+
+All of them have bee done using https://draw.io
+
+This is the ring topoloy (6 devices) - check the topology folder to use if via docker-topo
 
 ![](images/mpls-sr-ceos.png)
+
+
+This is the 3-node topoloy (still a ring :) This is good for testing on your laptop as 6 devices can put a bit of a strain on resources.
+
+![](images/3-node-mpls-sr-ceos.png)
 
 
 Example from EVE-NG on GCP using vEOS
