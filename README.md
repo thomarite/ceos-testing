@@ -113,7 +113,7 @@ This is the scructure.
 This is an example:
 
 ```
-(testdir2) go:1.7.5|py:3.7.3|/arista/testdir2/mpls-sr/nornir master$ python buid-config.py -b isis -c
+(testdir2) /testdir2/mpls-sr/nornir master$ python buid-config.py -b isis -c
 ------------
 hostname: r1
 task: deploy_config for isis
@@ -154,12 +154,65 @@ docker# chmod o+w zfs/graph/*/mnt/flash/.checkpoints
 docker# chmod o+w zfs/graph/*/mnt/flash  --> I can write on /mnt/flash needed for napalm-commit
 ```
 
+# TESTFSM
+
+Under the nornir forlder, I wanted to try TEXTFSM, so I had to download the templates. More info in https://github.com/networktocode/ntc-templates
+
+```
+$ cd nornir
+$ git clone https://github.com/networktocode/ntc-templates.git ntc-templates
+```
+
+Then you need to set an ENV var for TEXTFSM, you can do it via cli/bashr or via the script (my choice in this particular case)
+
+```
+$ export NET_TEXTFSM=~/nornir/ntc_templates/templates
+$ update your .bashrc with the above line
+
+or 
+
+python:
+import os
+os.environ['NET_TEXTFSM'] = './ntc-templates/templates'
+
+```
+
+This example it is a nornir task that uses netmiko to send "show ip interface brief" and we receive a structured reply thanks to textfsm.
+
+```
+(testdir2) /ceos-testing/nornir master$ python test-textfsm.py 
+netmiko_send_command************************************************************
+* r1 ** changed : False ********************************************************
+vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+[ { 'interface': 'Ethernet1',
+    'ip': '10.0.12.1/30',
+    'mtu': '1500',
+    'protocol': 'up',
+    'status': 'up'},
+  { 'interface': 'Ethernet2',
+    'ip': '10.0.13.1/30',
+    'mtu': '1500',
+    'protocol': 'up',
+    'status': 'up'},
+  { 'interface': 'Loopback1',
+    'ip': '10.0.0.1/32',
+    'mtu': '65535',
+    'protocol': 'up',
+    'status': 'up'},
+  { 'interface': 'Loopback2',
+    'ip': '192.168.0.1/32',
+    'mtu': '65535',
+    'protocol': 'up',
+    'status': 'up'}]
+...
+```
+
+
 # To-Do
 
 To-Dos
  - test ansible
  - test batfish
- - test textfsm
  - test netbox
  - test ZTP
  - add some alpine linux boxes to simulate customers, etc.
