@@ -154,7 +154,7 @@ docker# chmod o+w zfs/graph/*/mnt/flash/.checkpoints
 docker# chmod o+w zfs/graph/*/mnt/flash  --> I can write on /mnt/flash needed for napalm-commit
 ```
 
-# TESTFSM
+# TEXTFSM
 
 Under the nornir forlder, I wanted to try TEXTFSM, so I had to download the templates. More info in https://github.com/networktocode/ntc-templates
 
