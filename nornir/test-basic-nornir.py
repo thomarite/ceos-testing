@@ -7,7 +7,6 @@ def my_task(task):
 def main():
     #nr = InitNornir(core={"num_workers": 1})
     nr = InitNornir(config_file="./config.yaml")
-    #nr = InitNornir()
     aggresult = nr.run(task=my_task)
     multiresult = aggresult['r1']
     r = multiresult[0]
