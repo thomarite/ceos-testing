@@ -46,4 +46,4 @@ R1 after detecting prefix+community
 ---
 
 
-![](other-scripts/images/bgp-check-lab.png)
+![](images/bgp-check-lab.png)
