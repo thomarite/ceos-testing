@@ -206,14 +206,17 @@ vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     'status': 'up'}]
 ...
 ```
+# NetBox
 
+I struggled. All info here:
+
+https://blog.thomarite.uk/index.php/2020/07/07/netbox/
 
 # To-Do
 
 To-Dos
  - test ansible
  - test batfish
- - test netbox
  - test ZTP
  - add some alpine linux boxes to simulate customers, etc.
 
