@@ -1,0 +1,7 @@
+---
+ansible_network_os: eos
+# start - eapi config
+ansible_httpapi_use_ssl: 'yes'
+ansible_httpapi_validate_certs: 'no'
+ansible_httpapi_password: "{{ ansible_password }}"
+# end - eapi config
