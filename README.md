@@ -212,10 +212,52 @@ I struggled. All info here:
 
 https://blog.thomarite.uk/index.php/2020/07/07/netbox/
 
+# Ansible
+
+Hardwork to get this working with the latest ansible 2.9 and eos modules as most of the examples I was following were failing.
+
+I am not going to discover the fire regarding ansible so not much explanation here
+
+Having the virtualenv enabled, just install ansible with pip
+
+```
+(testdir2) /arista/testdir2$ python -m pip install ansible
+```
+
+Important files to take into account. 
+
+ansible.cfg -- define where is your inventory (./ansible-hosts in my case)
+
+ansible-hosts -- defintion of your hosts. You can define the user/pass and ports for ssh and https. Taking into account that each device uses a different port.
+
+group_vars/ceoslab.yaml -- You need to define specific vars for using the eapi and the networks_os.
+
+The file structure:
+
+```
+/ansible master$ tree 
+.
+├── ansible.cfg
+├── ansible-hosts
+├── group_vars
+│   └── ceoslab.yaml
+└── playbooks
+    ├── collect-facts-cli.yaml
+    └── collect-facts-eapi.yaml
+```
+
+So I have two basic playbooks to collect facts using SSH and EAPI (recommended to use -vvv for extra logging...)
+
+```
+/ansible master$ ansible-playbook playbooks/collect-facts-eapi.yaml -vvv
+/ansible master$ ansible-playbook playbooks/collect-facts-cli.yaml -vvv
+```
+
+I will try to add more examples.
+
 # To-Do
 
 To-Dos
- - test ansible
  - test batfish
  - test ZTP
  - add some alpine linux boxes to simulate customers, etc.
