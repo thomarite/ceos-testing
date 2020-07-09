@@ -212,6 +212,44 @@ I struggled. All info here:
 
 https://blog.thomarite.uk/index.php/2020/07/07/netbox/
 
+```
+/netbox-example$ tree -L 2
+.
+├── netbox-docker
+│   ├── build-functions
+│   ├── build-latest.sh
+│   ├── build-next.sh
+│   ├── build.sh
+│   ├── configuration
+│   ├── docker
+│   ├── docker-compose.test.yml
+│   ├── docker-compose.yml         <-- modify ports nginx 8080:8080
+│   ├── Dockerfile
+│   ├── env                        <-- netbox.env: define NAPALM_USERNAME and NAPALM_PASSWORD
+│   ├── initializers
+│   ├── LICENSE
+│   ├── README.md
+│   ├── reports
+│   ├── scripts
+│   ├── startup_scripts
+│   ├── test.sh
+│   └── VERSION
+├── nornir-napalm-netbox-demo
+│   ├── config.yaml              <-- modify url/port
+│   ├── data
+│   ├── Makefile
+│   ├── nornir.log
+│   ├── README.md
+│   ├── requirements.txt        <-- you will have to remove the version of some packages
+│   └── scripts                 <-- modify secrets and python scripts to use your python env
+└── venv
+    ├── bin
+    ├── include
+    ├── lib
+    └── share
+```
+
+
 # Ansible
 
 Hardwork to get this working with the latest ansible 2.9 and eos modules as most of the examples I was following were failing.
