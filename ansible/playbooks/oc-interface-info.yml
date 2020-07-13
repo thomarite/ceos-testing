@@ -3,7 +3,7 @@
   hosts: ceoslab
   connection: netconf
   vars:
-    ansible_network_os: nexus
+    ansible_network_os: default
 
   tasks:
     - name: 1 - OPENCONFIG-INTERFACES // FETCHING INFORMATION THROUGH GET
