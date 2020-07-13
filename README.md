@@ -1,3 +1,19 @@
+# Table of Contents
+   * [Intro](#intro)
+   * [Installation](#installation)
+   * [Arista cEOS](#arista-ceos)
+   * [Hardware](#hardware)
+   * [MPLS SR](#mpls-sr)
+      * [Issues](#issues)
+   * [Nornir](#nornir)
+      * [cEOS Docker Issue](#ceos-docker-issue)
+   * [TEXTFSM](#textfsm)
+   * [Netbox](#netbox)
+   * [Ansible](#ansible)
+      * [Netconf - Openconfig](#netconf/openconfig)
+   * [To-Do](#to-do)
+   * [Diagrams](#diagrams)
+
 # Intro
 
 Use docker-topo to build some network topologies using Arista cEOS (mainly MPLS SR) and test other tools like ansible, napalm, nornir, batfish, netbox, etc. Other topologies in my list are leaf-spine, Route-Reflectors, etc
@@ -45,13 +61,13 @@ You will need to create an account in arista.com (it is free) to downloand the c
 My laptop is running Debian 10 Testing, Intel i7 and 8GB RAM. It struggles a bit with the 6 containers running.
 
 
-# MPLS Segment Routing
+# MPLS SR
 
 Most of the topologies are MPLS Segment Routing using ISIS as IGP and EVPN for providing a L2/3 VPN.
 
 More details: https://blog.thomarite.uk/index.php/2020/05/25/mpls-segment-routing-arista-lab/
 
-# Issues
+### Issues
 
  - Need to disable all PIM processes ==> constant cores  -> can't run config, save config etc
  - mtu only 1500 -> isis doesnt come up --- I was expecting to be able to run jumbo frames... I am so naive...
@@ -141,7 +157,7 @@ changed: False
 diff:
 ```
 
-# cEOS - docker - Napalm/Nornir Issue
+### cEOS - docker issue
 
 I am using cEOS that is a container controlled via docker.
 Nornir uses Napalm to connect to the cEOS containers
@@ -294,10 +310,36 @@ So I have two basic playbooks to collect facts using SSH and EAPI (recommended t
 I will try to add more examples.
 
 
-# Netconf / Openconfig
+### Netconf - Openconfig
 
-These has been quite hard. This simple test to get the interface config via netcong is based on [Anton Karneliuk blog](https://karneliuk.com/2018/08/openconfig-part-3-advanced-openconfig-w-ansible-for-arista-eos-cisco-ios-xr-and-nokia-sr-os-route-policy-bgp-and-interfaces-again): 
+This has been quite hard so far. This simple test "oc-interface-info.yml" to get the interface config via netcong is based on [Anton Karneliuk blog](https://karneliuk.com/2018/08/new-netconf-modules-in-ansible-2-6-examples-for-arista-eos-cisco-ios-xr-and-nokia-sr-os/). One of the best blogs about network automation.
 
+I had to pip install "jxmlease"
+
+
+```
+(testdir2) /ceos-testing/ansible master$ ansible-playbook playbooks/oc-interface-info.yml --limit=r1
+(testdir2) /ceos-testing/ansible master$ ansible-playbook playbooks/oc-interface-info.yml
+```
+
+And all files are generated in /tmp:
+
+```
+/tmp$ ls -ltr | grep json
+-rw-r--r-- 1 tomas tomas 53476 Jul 13 13:53 r1_list_of_schemas.json
+-rw-r--r-- 1 tomas tomas 53476 Jul 13 17:45 r2_list_of_schemas.json
+-rw-r--r-- 1 tomas tomas 53476 Jul 13 17:45 r3_list_of_schemas.json
+-rw-r--r-- 1 tomas tomas 35254 Jul 13 18:11 r2_oc_conf.json
+-rw-r--r-- 1 tomas tomas 35254 Jul 13 18:11 r1_oc_conf.json
+-rw-r--r-- 1 tomas tomas 35254 Jul 13 18:11 r3_oc_conf.json
+-rw-r--r-- 1 tomas tomas 32114 Jul 13 18:11 r2_openconfig_interfaces.json
+-rw-r--r-- 1 tomas tomas 32114 Jul 13 18:11 r1_openconfig_interfaces.json
+-rw-r--r-- 1 tomas tomas 32114 Jul 13 18:11 r3_openconfig_interfaces.json
+```
+
+And in this playbook I had to change the network_os to "default" as "eos" fails. Anton's blog uses "nexus" but it seems you dont have to anymore at least in ansible 2.9.
+
+https://docs.ansible.com/ansible/latest/network/user_guide/platform_netconf_enabled.html
 
 # To-Do
 
