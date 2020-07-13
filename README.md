@@ -10,7 +10,7 @@
    * [TEXTFSM](#textfsm)
    * [Netbox](#netbox)
    * [Ansible](#ansible)
-      * [Netconf - Openconfig](#netconf/openconfig)
+      * [Openconfig](#openconfig)
    * [To-Do](#to-do)
    * [Diagrams](#diagrams)
    * [Other](#other)
@@ -311,7 +311,7 @@ So I have two basic playbooks to collect facts using SSH and EAPI (recommended t
 I will try to add more examples.
 
 
-### Netconf - Openconfig
+### Openconfig
 
 This has been quite hard so far. This simple test "oc-interface-info.yml" to get the interface config via netcong is based on [Anton Karneliuk blog](https://karneliuk.com/2018/08/new-netconf-modules-in-ansible-2-6-examples-for-arista-eos-cisco-ios-xr-and-nokia-sr-os/). One of the best blogs about network automation.
 
