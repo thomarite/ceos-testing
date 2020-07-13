@@ -1,5 +1,5 @@
 ---
-- name: Run commands on ceos lab
+- name: Run commands on ceos lab via ssh
   hosts: ceoslab
   connection: network_cli
   gather_facts: false

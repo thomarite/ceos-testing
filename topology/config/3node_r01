@@ -1,4 +1,4 @@
-! Startup-config last modified at  Thu Jul  2 17:27:16 2020 by tomas
+! Startup-config last modified at  Mon Jul 13 16:43:37 2020 by root
 ! device: r01 (cEOSLab, EOS-4.23.3M)
 !
 alias delta bash rm /.deltas/var/tmp/agents/core.*
@@ -120,5 +120,12 @@ router multicast
 management api http-commands
    protocol unix-socket
    no shutdown
+!
+management api gnmi
+   transport grpc GRPC
+      port 3333
+!
+management api netconf
+   transport ssh default
 !
 end

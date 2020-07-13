@@ -1,5 +1,5 @@
 ---
-- name: Run commands on remote ceos lab
+- name: Run commands on ceos lab via eapi
   hosts: ceoslab
   connection: httpapi
   gather_facts: false
