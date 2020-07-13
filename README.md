@@ -293,6 +293,12 @@ So I have two basic playbooks to collect facts using SSH and EAPI (recommended t
 
 I will try to add more examples.
 
+
+# Netconf / Openconfig
+
+These has been quite hard. This simple test to get the interface config via netcong is based on [Anton Karneliuk blog](https://karneliuk.com/2018/08/openconfig-part-3-advanced-openconfig-w-ansible-for-arista-eos-cisco-ios-xr-and-nokia-sr-os-route-policy-bgp-and-interfaces-again): 
+
+
 # To-Do
 
 To-Dos
