@@ -338,7 +338,7 @@ And all files are generated in /tmp:
 -rw-r--r-- 1 tomas tomas 32114 Jul 13 18:11 r3_openconfig_interfaces.json
 ```
 
-And in this playbook I had to change the network_os to "default" as "eos" fails. Anton's blog uses "nexus" but it seems you dont have to anymore at least in ansible 2.9.
+And in this playbook I had to change the network_os to "default" as "eos" fails. Anton's blog uses "nexus" but it seems you dont have to do that anymore at least in ansible 2.9.
 
 https://docs.ansible.com/ansible/latest/network/user_guide/platform_netconf_enabled.html
 
