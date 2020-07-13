@@ -13,6 +13,7 @@
       * [Netconf - Openconfig](#netconf/openconfig)
    * [To-Do](#to-do)
    * [Diagrams](#diagrams)
+   * [Other](#other)
 
 # Intro
 
@@ -361,6 +362,11 @@ This is the 3-node topoloy (still a ring :) This is good for testing on your lap
 
 ![](images/3-node-mpls-sr-ceos.png)
 
+
+# Other
+
+Markdown Cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet<br>
+Table of Contents: https://github.com/ekalinin/github-markdown-toc<br>
 
 Example from EVE-NG on GCP using vEOS
 
