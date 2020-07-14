@@ -10,7 +10,7 @@
    * [TEXTFSM](#textfsm)
    * [Netbox](#netbox)
    * [Ansible](#ansible)
-      * [Openconfig](#openconfig)
+   * [Openconfig](#openconfig)
    * [To-Do](#to-do)
    * [Diagrams](#diagrams)
    * [Other](#other)
@@ -55,11 +55,11 @@ docker ps -a
 
 # Arista cEOS
 
-You will need to create an account in arista.com (it is free) to downloand the cEOS images.
+You will need to create an account in arista.com (it is free) to downloand the cEOS images. I am using 4.23.3M
 
 # Hardware
 
-My laptop is running Debian 10 Testing, Intel i7 and 8GB RAM. It struggles a bit with the 6 containers running.
+My laptop (2015) is running Debian 10 Testing, Intel i7 and 8GB RAM. It struggles a bit with the 6 containers running so I am using the 3-node topology.
 
 
 # MPLS SR
@@ -95,7 +95,7 @@ bash-4.2#
 
 # Nornir
 
-In the "nornir" folder you can find a python script "buid-config.py" using nornir to build BGP and ISIS config (via jinja2) and use napalm to push the config. All the inventory is based on the 3-node topology but it is easy to change it to a different one. You need to install the python libraries from requirements.txt
+I am using 2.4.0. In the "nornir" folder you can find a python script "buid-config.py" using nornir to build BGP and ISIS config (via jinja2) and use napalm to push the config. All the inventory is based on the 3-node topology but it is easy to change it to a different one. You need to install the python libraries from requirements.txt
 
 This is the scructure. 
 
@@ -311,16 +311,19 @@ So I have two basic playbooks to collect facts using SSH and EAPI (recommended t
 I will try to add more examples.
 
 
-### Openconfig
+# Openconfig
 
-This has been quite hard so far. This simple test "oc-interface-info.yml" to get the interface config via netcong is based on [Anton Karneliuk blog](https://karneliuk.com/2018/08/new-netconf-modules-in-ansible-2-6-examples-for-arista-eos-cisco-ios-xr-and-nokia-sr-os/). One of the best blogs about network automation.
+This is an attempto to use openconfig via ansible.
+
+### Get Config
+
+This has been quite hard so far. This simple test "oc-get-interface-info.yaml" to get the interface config via netcong is based on [Anton Karneliuk blog](https://karneliuk.com/2018/08/new-netconf-modules-in-ansible-2-6-examples-for-arista-eos-cisco-ios-xr-and-nokia-sr-os/). One of the best blogs about network automation.
 
 I had to pip install "jxmlease"
 
-
 ```
-(testdir2) /ceos-testing/ansible master$ ansible-playbook playbooks/oc-interface-info.yml --limit=r1
-(testdir2) /ceos-testing/ansible master$ ansible-playbook playbooks/oc-interface-info.yml
+(testdir2) /ceos-testing/ansible master$ ansible-playbook playbooks/oc-get-interface-info.yml --limit=r1
+(testdir2) /ceos-testing/ansible master$ ansible-playbook playbooks/oc-get-interface-info.yml
 ```
 
 And all files are generated in /tmp:
@@ -341,6 +344,109 @@ And all files are generated in /tmp:
 And in this playbook I had to change the network_os to "default" as "eos" fails. Anton's blog uses "nexus" but it seems you dont have to do that anymore at least in ansible 2.9.
 
 https://docs.ansible.com/ansible/latest/network/user_guide/platform_netconf_enabled.html
+
+
+### Push Config
+
+This is based on [Anton Karneliuk blog part3 for openconfig via ansible](https://karneliuk.com/2018/08/openconfig-part-3-advanced-openconfig-w-ansible-for-arista-eos-cisco-ios-xr-and-nokia-sr-os-route-policy-bgp-and-interfaces-again/).
+
+In this case I am just following the role created in the blog adapting small things to my env.
+
+Collecting data is fine. It just takes time to get all YANG modules and process them.
+
+```
+/ceos-testing/ansible master$ ansible-playbook playbooks/oc-push-config.yaml --limit=r1 --tag=arista_collect -vvv
+```
+
+And this is the error when trying to push the interface config. In my case, it is just a new loopback interface with only ipv4.
+```
+/ceos-testing/ansible master$ ansible-playbook playbooks/oc-push-config.yaml --limit=r1 --tag=arista_configure -vvv
+
+fatal: [r1]: FAILED! => {
+    "changed": false,
+    "invocation": {
+        "module_args": {
+            "backup": false,
+            "backup_options": null,
+            "commit": true,
+            "confirm": 0,
+            "confirm_commit": false,
+            "content": "<nc:config xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\" xmlns:oc-if=\"http://openconfig.net/yang/interfaces\" xmlns:oc-ip=\"http://openconfig.net/yang/interfaces/ip\" xmlns:ianaift=\"urn:ietf:params:xml:ns:yang:iana-if-type\" xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\" xmlns:oc-eth=\"http://openconfig.net/yang/interfaces/ethernet\" xmlns:oc-ext=\"http://openconfig.net/yang/openconfig-ext\" xmlns:oc-ift=\"http://openconfig.net/yang/openconfig-if-types\" xmlns:oc-inet=\"http://openconfig.net/yang/types/inet\" xmlns:oc-lag=\"http://openconfig.net/yang/interfaces/aggregate\" xmlns:oc-types=\"http://openconfig.net/yang/openconfig-types\" xmlns:oc-vlan=\"http://openconfig.net/yang/vlan\" xmlns:oc-vlan-types=\"http://openconfig.net/yang/vlan-types\" xmlns:oc-yang=\"http://openconfig.net/yang/types/yang\" xmlns:yang=\"urn:ietf:params:xml:ns:yang:ietf-yang-types\"><oc-if:interfaces><oc-if:interface><oc-if:name>Loopback3</oc-if:name><oc-if:config><oc-if:description>generated via openconfig</oc-if:description><oc-if:enabled>true</oc-if:enabled><oc-if:name>Loopback3</oc-if:name><oc-if:type>oc-if:softwareLoopback</oc-if:type></oc-if:config><oc-if:subinterfaces><oc-if:subinterface><oc-if:index>0</oc-if:index><oc-ip:ipv4><oc-ip:addresses><oc-ip:address><oc-ip:ip>10.0.0.11</oc-ip:ip><oc-ip:config><oc-ip:ip>10.0.0.11</oc-ip:ip><oc-ip:prefix-length>32</oc-ip:prefix-length></oc-ip:config></oc-ip:address></oc-ip:addresses><oc-ip:config><oc-ip:enabled>true</oc-ip:enabled><oc-ip:mtu>1500</oc-ip:mtu></oc-ip:config></oc-ip:ipv4></oc-if:subinterface></oc-if:subinterfaces></oc-if:interface></oc-if:interfaces></nc:config>",
+            "default_operation": null,
+            "delete": false,
+            "error_option": "stop-on-error",
+            "format": "xml",
+            "host": "r1",
+            "hostkey_verify": true,
+            "lock": "always",
+            "look_for_keys": true,
+            "password": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+            "port": 2000,
+            "save": false,
+            "source_datastore": null,
+            "src": null,
+            "ssh_keyfile": null,
+            "target": "running",
+            "timeout": 10,
+            "username": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+            "validate": false
+        }
+    },
+    "msg": "parseIdentityref parsed invalid identity openconfig-interfaces:softwareLoopback for leaf node type"
+}
+
+PLAY RECAP ******************************************************************************************************************************************************************************************************************************
+```
+ 
+I have been trying to play with the base config "./playbooks/roles/openconfig/files/r1_openconfig-interfaces.json" but no joy. I am have used the same config gathered from the "oc-get-interface-info.yam" playbook and it is even worse as jtox fails.
+
+Based on Anton's blog, Arista seems not very interested in Openconfig. As he had problems too. And searching on the internet initially, I only could find good info from Cisco.
+
+
+As well, while adding the new playbook to my repo, I had to dig a bit in some ansible points like [roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html), [netconf_config module](https://docs.ansible.com/ansible/latest/modules/netconf_config_module.html) to get netconf connection established, [include_vars](https://docs.ansible.com/ansible/latest/modules/include_vars_module.html) as I realised that I had to use relative path to the module or full path,  and [lookup](https://docs.ansible.com/ansible/2.4/playbooks_lookups.html) to realise how to use a var in the path.
+
+
+
+This is my final dir tree
+
+```
+/ansible master$ tree
+.
+├── ansible.cfg
+├── ansible-hosts
+├── group_vars
+│   └── ceoslab.yaml
+└── playbooks
+    ├── collect-facts-cli.yaml
+    ├── collect-facts-eapi.yaml
+    ├── oc-get-interface-info.yaml
+    ├── oc-push-config.yaml
+    └── roles
+        └── openconfig
+            ├── files
+            │   ├── r1_openconfig-interfaces.json
+            │   ├── r1_openconfig-interfaces.json-NEW
+            │   ├── r1_openconfig-interfaces.json-ORIG
+            │   ├── r1_openconfig-network-instance.json
+            │   ├── r1_openconfig-routing-policy.json
+            │   ├── r2_openconfig-interfaces.json
+            │   ├── r2_openconfig-network-instance.json
+            │   ├── r2_openconfig-routing-policy.json
+            │   ├── r3_openconfig-interfaces.json
+            │   ├── r3_openconfig-network-instance.json
+            │   └── r3_openconfig-routing-policy.json
+            ├── tasks
+            │   ├── collect.yml
+            │   ├── configure.yml
+            │   ├── jtox_builder.yml
+            │   ├── main.yml
+            │   ├── yang_collector.yml
+            │   └── yang_configurator.yml
+            ├── templates
+            │   └── pyang_request_jtox.j2
+            └── vars
+                └── desired_openconfig_modules.yml
+```
 
 # To-Do
 
