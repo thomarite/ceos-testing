@@ -1,0 +1,21 @@
+---
+- name: 1 FIXING YANG MODULES // {{ item.module }}
+  replace:
+    path: "{{ outer_item.path }}/YANG/{{ item.module }}"
+    regexp: 'require-instance true'
+    replace: '// require-instance true'
+  loop: "{{ outer_item.src_yang }}"
+
+- name: 2 PREPARING PYANG REQUEST // {{ outer_item.name }}
+  template:
+    src: pyang_request_jtox.j2
+    dest: /tmp/oc/{{ inventory_hostname }}/imba.jtox
+
+- name: 3 CONSTRUCTING DESIRED JTOX DRIVER // {{ outer_item.name }}
+  command: "{{ lookup ('file', '/tmp/oc/' + inventory_hostname + '/imba.jtox') }}"
+
+#- name: CLEARING PYANG REQUEST // {{ outer_item.name }}
+#  file:
+#    dest: /tmp/oc/imba.jtox
+#    state: absent
+...

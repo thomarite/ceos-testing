@@ -1,0 +1,40 @@
+{
+    "openconfig-interfaces:interfaces": {
+        "interface": [
+            {
+                "name": "Loopback3", 
+                "config": {
+                    "description": "generated via openconfig",
+                    "enabled": true,
+                    "name": "Loopback3",
+                    "type": "softwareLoopback"
+                },
+                "subinterfaces": {
+                    "subinterface": [
+                        {
+                            "index": 0,
+                            "openconfig-if-ip:ipv4": {
+                                "addresses": {
+                                    "address": [
+                                        {
+                                            "config": {
+                                                "ip": "10.0.0.11", 
+                                                "prefix-length": 32
+                                            }, 
+                                            "ip": "10.0.0.11"
+                                        }
+                                    ]
+                                },
+                                "config": {
+                                    "enabled": true,
+                                    "mtu": 1500
+                                }
+
+                            }
+                        } 
+                    ]
+                }
+            }
+        ]
+    }
+}

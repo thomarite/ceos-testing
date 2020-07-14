@@ -1,35 +1,39 @@
 ---
-- name: Run netconf to ceos lab
+- name: Run netconf to get info based on openconfig from ceoslab
   hosts: ceoslab
   connection: netconf
   vars:
     ansible_network_os: default
 
   tasks:
-    - name: 1 - OPENCONFIG-INTERFACES // FETCHING INFORMATION THROUGH GET
+    - name: 0 - CREATING DIRECTORY
+      file:
+        dest: /tmp/oc
+        state: directory
+    - name: 1.1 OPENCONFIG-INTERFACES // FETCHING INFORMATION THROUGH GET
       netconf_get:
         display: json
         filter: <interfaces xmlns="http://openconfig.net/yang/interfaces"/> 
       register: output_json
 
-    - name: 2 - OPENCONFIG-INTERFACES // SAVING OUTPUT TO FILE
+    - name: 1.2 - OPENCONFIG-INTERFACES // SAVING OUTPUT TO FILE
       copy: 
         content: "{{ output_json.output | to_nice_json }}"
-        dest: /tmp/{{ inventory_hostname }}_oc_conf.json
+        dest: /tmp/oc/{{ inventory_hostname }}_oc_conf.json
 
-    - name: 3 - ALL SCHEMAS // FETCHING INFORMATION THROUGH GET
+    - name: 2.1 - ALL SCHEMAS // FETCHING INFORMATION THROUGH GET
       netconf_get:
         display: json
         filter: <netconf-state xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring"><schemas><schema/></schemas></netconf-state>
         lock: never
       register: list_of_schemas
 
-    - name: 4 - ALL SCHEMAS // SAVING OUTPUT TO FILE
+    - name: 2.2 - ALL SCHEMAS // SAVING OUTPUT TO FILE
       copy:
         content: "{{ list_of_schemas.output | to_nice_json }}"
-        dest: /tmp/{{ inventory_hostname }}_list_of_schemas.json
+        dest: /tmp/oc/{{ inventory_hostname }}_list_of_schemas.json
 
-    - name: 5 - OPENCONFIG-INTERFACES SCHEMA // FETCHING INFORMATION THROUGH GET-SCHEMA
+    - name: 3.1 - OPENCONFIG-INTERFACES SCHEMA // FETCHING INFORMATION THROUGH GET-SCHEMA
       netconf_rpc:
         rpc: get-schema
         xmlns: "urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring"
@@ -37,9 +41,8 @@
         display: json
       register: openconfig_interfaces
 
-    - name: 6 - OPENCONFIG-INTERFACES SCHEMA // SAVING OUTPUT TO FILE
+    - name: 3.2 - OPENCONFIG-INTERFACES SCHEMA // SAVING OUTPUT TO FILE
       copy:
         content: "{{ openconfig_interfaces.stdout }}"
-        dest: /tmp/{{ inventory_hostname }}_openconfig_interfaces.json
-
+        dest: /tmp/oc/{{ inventory_hostname }}_openconfig_interfaces.json
 ...

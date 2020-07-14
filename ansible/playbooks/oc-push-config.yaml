@@ -1,0 +1,19 @@
+---
+- name: collect information to build openconfig configuration
+  hosts: ceoslab
+  connection: netconf
+  tags: arista_collect
+  vars:
+    ansible_network_os: default
+  roles:
+    - { role: openconfig, activity: collect }
+
+- name: configure using openconfig
+  hosts: ceoslab
+  connection: netconf
+  tags: arista_configure
+  vars:
+    ansible_network_os: default
+  roles:
+    - { role: openconfig, activity: configure }
+...

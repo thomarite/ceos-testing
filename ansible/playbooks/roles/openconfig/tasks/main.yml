@@ -1,0 +1,9 @@
+---
+- name: COLLECTOR
+  include_tasks: collect.yml
+  when: activity == 'collect'
+
+- name: CONFIGURATOR
+  include_tasks: configure.yml
+  when: activity == 'configure'
+...

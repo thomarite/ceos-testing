@@ -1,0 +1,111 @@
+{
+    "openconfig-network-instance:network-instances": {
+        "network-instance": [
+            {
+                "config": {
+                    "name": "default", 
+                    "type": "DEFAULT_INSTANCE"
+                }, 
+                "name": "default", 
+                "protocols": {
+                    "protocol": [
+                        {
+                            "bgp": {
+                                "global": {
+                                    "afi-safis": {
+                                        "afi-safi": [
+                                            {
+                                                "afi-safi-name": "IPV4_UNICAST", 
+                                                "config": {
+                                                    "afi-safi-name": "IPV4_UNICAST", 
+                                                    "enabled": true
+                                                }
+                                            }
+                                        ]
+                                    }, 
+                                    "config": {
+                                        "as": 100, 
+                                        "router-id": "10.0.0.3"
+                                    }
+                                }, 
+                                "neighbors": {
+                                    "neighbor": [
+                                        {
+                                            "afi-safis": {
+                                                "afi-safi": [
+                                                    {
+                                                        "afi-safi-name": "IPV4_UNICAST", 
+                                                        "config": {
+                                                            "afi-safi-name": "IPV4_UNICAST", 
+                                                            "enabled": true
+                                                        }
+                                                    }
+
+                                                ]
+                                            }, 
+                                            "config": {
+                                                "neighbor-address": "10.0.0.1", 
+                                                "peer-group": "AS100-CORE"
+                                            }, 
+                                            "neighbor-address": "10.0.0.1"
+                                        },
+                                        {
+                                            "afi-safis": {
+                                                "afi-safi": [
+                                                    {
+                                                        "afi-safi-name": "IPV4_UNICAST", 
+                                                        "config": {
+                                                            "afi-safi-name": "IPV4_UNICAST", 
+                                                            "enabled": true
+                                                        }
+                                                    }
+
+                                                ]
+                                            }, 
+                                            "config": {
+                                                "neighbor-address": "10.0.0.2", 
+                                                "peer-group": "AS100-CORE"
+                                            }, 
+                                            "neighbor-address": "10.0.0.2"
+                                        }
+                                    ]
+                                }, 
+                                "peer-groups": {
+                                    "peer-group": [
+                                        {
+                                            "afi-safis": {
+                                                "afi-safi": [
+                                                    {
+                                                        "afi-safi-name": "IPV4_UNICAST", 
+                                                        "config": {
+                                                            "afi-safi-name": "IPV4_UNICAST", 
+                                                            "enabled": true
+                                                        }
+                                                    }
+                                                ]
+                                            }, 
+                                            "config": {
+                                                "peer-group-name": "AS100-CORE",
+                                                "peer-as": 100,
+                                                "auth-password": "mpls-sr",
+                                                "send-community": "EXTENDED"
+                                            }, 
+                                            "peer-group-name": "AS100-CORE"
+                                        }
+                                    ]
+                                }
+                            }, 
+                            "config": {
+                                "enabled": true, 
+                                "identifier": "BGP", 
+                                "name": "BGP"
+                            }, 
+                            "identifier": "BGP", 
+                            "name": "BGP"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

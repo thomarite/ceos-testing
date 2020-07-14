@@ -1,0 +1,25 @@
+---
+desired_openconfig_modules:
+    - name: OC INTERFACES
+      jtox_output: openconfig-interfaces.jtox
+      path: /tmp/oc/{{ inventory_hostname }}
+      related_config: "{{ inventory_hostname }}_openconfig-interfaces.json"
+      src_yang:
+          - module: openconfig-interfaces.yang
+          - module: openconfig-if-ip.yang
+          - module: openconfig-if-ethernet.yang
+          - module: openconfig-if-aggregate.yang
+          - module: openconfig-vlan.yang
+    - name: OC ROUTING POLICY
+      jtox_output: openconfig-routing-policy.jtox
+      path: /tmp/oc/{{ inventory_hostname }}
+      related_config: "{{ inventory_hostname }}_openconfig-routing-policy.json"
+      src_yang:
+          - module: openconfig-routing-policy.yang
+    - name: OC NETWORK INSTANCE
+      jtox_output: openconfig-network-instance.jtox
+      path: /tmp/oc/{{ inventory_hostname }}
+      related_config: "{{ inventory_hostname }}_openconfig-network-instance.json"
+      src_yang:
+          - module: openconfig-network-instance.yang
+...

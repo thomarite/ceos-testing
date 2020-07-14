@@ -1,0 +1,61 @@
+{
+    "openconfig-routing-policy:routing-policy": {
+        "defined-sets": {
+            "prefix-sets": {
+                "prefix-set": [
+                    {
+                        "config": {
+                            "name": "PS_OC_TEST"
+                        }, 
+                        "name": "PS_OC_TEST", 
+                        "prefixes": {
+                            "prefix": [
+                                {
+                                   "config": {
+                                        "ip-prefix": "10.0.0.0/24", 
+                                        "masklength-range": "32..32"
+                                    }, 
+                                    "ip-prefix": "10.0.0.0/24", 
+                                    "masklength-range": "32..32"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }, 
+        "policy-definitions": {
+            "policy-definition": [
+                    {
+                    "config": {
+                        "name": "RP_OC_TEST"
+                    }, 
+                    "name": "RP_OC_TEST", 
+                    "statements": {
+                        "statement": [
+                            {
+                                "actions": {
+                                    "config": {
+                                        "policy-result": "ACCEPT_ROUTE"
+                                    }
+                                }, 
+                                "conditions": {
+                                    "match-prefix-set": {
+                                        "config": {
+                                            "match-set-options": "ANY", 
+                                            "prefix-set": "PS_OC_TEST"
+                                        }
+                                    }
+                                }, 
+                                "config": {
+                                    "name": "statement-10"
+                                }, 
+                                "name": "statement-10"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

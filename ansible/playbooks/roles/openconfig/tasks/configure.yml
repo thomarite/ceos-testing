@@ -1,0 +1,9 @@
+---
+- name: LOADING LIST OF YANG MODELS TO CONFIGURE
+  include_vars:
+    file: desired_openconfig_modules.yml
+
+- name: LAUNCHING CONFIGURATION ENGINE
+  include_tasks: yang_configurator.yml
+  loop: "{{ desired_openconfig_modules }}"
+...

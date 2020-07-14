@@ -1,0 +1,56 @@
+---
+- name: 1 - CREATING DIRECTORY FOR YANG MODULES
+  file:
+    dest: /tmp/oc/{{ inventory_hostname }}/YANG
+    state: directory
+
+- name: 2 - GETTING LIST OF ALL SUPPORTED YANG MODULES FROM {{ inventory_hostname }}
+  netconf_get:
+    display: json
+    filter: <netconf-state xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring"><schemas><schema/></schemas></netconf-state>
+    lock: never
+  register: list_of_schemas
+
+- name: 3 - SAVING LIST OF ALL SUPPORTED YANG MODULES FROM {{ inventory_hostname }}
+  copy:
+    content: "{{ list_of_schemas.output | to_nice_json }}"
+    dest: /tmp/oc/{{ inventory_hostname }}/list_of_schemas.json
+
+- name: 4 - PERFORMING SOME WORKAROUNDS ON VARIABLES
+  replace:
+    path: /tmp/oc/{{ inventory_hostname }}/list_of_schemas.json
+    regexp: 'rpc-reply'
+    replace: 'rpc_reply'
+  when: ansible_network_os == "iosxr"
+
+- name: 5 - PERFORMING SOME WORKAROUNDS ON VARIABLES
+  replace:
+    path: /tmp/oc/{{ inventory_hostname }}/list_of_schemas.json
+    regexp: 'netconf-state'
+    replace: 'netconf_state'
+
+- name: 6 - IMPORTING NAMES OF SUPPORTED YANG MODELS
+  include_vars:
+    file: /tmp/oc/{{ inventory_hostname }}/list_of_schemas.json
+    name: YANG
+
+- name: 7.1 - FETCHING YANG MODELS FROM {{ inventory_hostname }} / {{ ansible_network_os }} -- LONG PROCESS
+  include_tasks: yang_collector.yml
+  loop: "{{ YANG.rpc_reply.data.netconf_state.schemas.schema }}"
+  when: ansible_network_os == "iosxr"
+
+- name: 7.2 - FETCHING YANG MODELS FROM {{ inventory_hostname }} / {{ ansible_network_os }} -- LONG PROCESS
+  include_tasks: yang_collector.yml
+  loop: "{{ YANG.data.netconf_state.schemas.schema }}"
+  when: ansible_network_os != "iosxr"
+
+- name: 8 - IMPORTING VARS
+  include_vars: 
+    file: desired_openconfig_modules.yml
+
+- name: 9 - CREATING JTOX DRIVERS
+  include_tasks: jtox_builder.yml
+  loop: "{{ desired_openconfig_modules }}"
+  loop_control:
+    loop_var: outer_item
+...

@@ -1,0 +1,1 @@
+pyang --lax-quote-checks -f jtox -o {{ outer_item.path }}/{{ outer_item.jtox_output}} -p {{ outer_item.path }}/YANG {% for src_module in outer_item.src_yang %} {{ outer_item.path }}/YANG/{{ src_module.module}} {% endfor %}

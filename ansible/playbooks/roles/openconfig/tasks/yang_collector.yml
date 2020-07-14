@@ -1,0 +1,21 @@
+---
+    - name: FETCHING {{ item.identifier }} FROM {{ inventory_hostname }}
+      netconf_rpc:
+        rpc: get-schema
+        xmlns: "urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring"
+        content: 
+          identifier: "{{ item.identifier }}"
+        display: json
+      register: supported_yang_modules
+
+    - name: SAVING {{ item.identifier }} FROM {{ inventory_hostname }}
+      copy: 
+        content: "{{ supported_yang_modules.stdout }}"
+        dest: /tmp/oc/{{ inventory_hostname }}/YANG/{{ item.identifier }}.yang
+
+    - name: MAKING {{ item.identifier }} USABLE
+      replace:
+        path: /tmp/oc/{{ inventory_hostname }}/YANG/{{ item.identifier }}.yang
+        regexp: '<.+>'
+        replace: ''
+...

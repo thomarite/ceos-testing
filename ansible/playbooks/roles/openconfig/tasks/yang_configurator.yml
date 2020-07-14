@@ -1,0 +1,44 @@
+---
+- name: 1 - MAKING TEMPORARY COPY OF CONFIG FILE {{ item.related_config }}
+  copy:
+    src: "{{ item.related_config }}"
+    dest: "{{ item.path }}/{{ item.related_config }}"
+
+- name: 2 - CREATING XML FOR NETCONF FROM {{ item.related_config }} using {{ item.jtox_output }}
+  command: json2xml -t config -o {{ item.path }}/oc_conf.xml {{ item.path }}/{{ item.jtox_output }} {{ item.path }}/{{ item.related_config }}
+
+- name: 3 - REMOVING UNNECESSARY FRAMING
+  replace:
+    path: "{{ item.path }}/oc_conf.xml"
+    regexp: '<\?.+\?>\n'
+    replace: ''
+
+- name: 4 - ARIST EOS 4.20.7F  // MODIFYING XML
+  replace:
+    path: "{{ item.path }}/oc_conf.xml"
+    regexp: '>oc-netinst:'
+    replace: '>'
+  when: (item.jtox_output == "openconfig-network-instance.jtox" and ansible_network_os == "default")
+
+- name: 5 - PUSHING PARAMETERS FROM {{ item.related_config }} to {{ inventory_hostname }}
+  netconf_config:
+    host: "{{ inventory_hostname }}"
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    port: "{{ ansible_port }}"
+    #hostkey_verify: false
+    #look_for_keys: false
+    #source_datastore: "running"
+    target: "running"
+    content: "{{ lookup ('file', '{{ item.path }}/oc_conf.xml') }}"
+
+#- name: 6 - DELETING TEMPORARY XML FOR NETCONF
+#  file:
+#    dest: "{{ item.path }}/oc_conf.xml"
+#    state: absent 
+#
+#- name: 7 - DELETING TEMPORARY COPY OF CONFIG FILE {{ item.related_config }}
+#  file:
+#    dest: "{{ item.path }}/{{ item.related_config }}"
+#    state: absent
+...
