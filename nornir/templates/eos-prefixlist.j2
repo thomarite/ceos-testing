@@ -1,0 +1,16 @@
+{% if prefixlists is defined %}
+!
+{% for plist in prefixlists %}
+{% if plist.delete is defined and plist.delete == "yes" %}
+no ip prefix-list {{ plist.name }}
+{% else %}
+{% for entry in plist.entries %}
+{% set lessthan = "" %}
+{% if entry.prefixlenless is defined %}
+{% set lessthan = " le " + entry.prefixlenless|string %}
+{% endif %}
+ip prefix-list {{ plist.name }} seq {{ entry.seqno }} {{ entry.action }} {{ entry.prefix }}/{{ entry.prefixlen }} {{ lessthan }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}

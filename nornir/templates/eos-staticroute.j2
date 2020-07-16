@@ -1,0 +1,27 @@
+{% if staticroutes is defined %}
+{% for static in staticroutes %}
+{# --1- Check if we want to delete the config ---- #}
+{% if static.delete is defined and static.delete == "yes" %}
+{% set delete = "no " %}
+{% else %}
+{% set delete = "" %}
+{% endif %}
+{# --2- Starting building the static route---- #}
+{% if static.metric is defined %}
+{% set metric = ' ' + static.metric %}
+{% else %}
+{% set metric = '' %}
+{% endif %}
+{% if static.tag is defined %}
+{% set tag = ' tag ' + static.tag %}
+{% else %}
+{% set tag = '' %}
+{% endif %}
+{% if static.name is defined %}
+{% set name = ' name ' + static.name %}
+{% else %}
+{% set name = '' %}
+{% endif %}
+{{ delete }}ip route {{ static.prefix }}/{{ static.prefixlen }} {{ static.nexthop }}{{ metric }}{{ tag }}{{ name }}
+{% endfor %}
+{% endif %}

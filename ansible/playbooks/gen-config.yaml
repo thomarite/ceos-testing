@@ -1,0 +1,71 @@
+---
+- name: ceoslab config
+  hosts: ceoslab
+  connection: httpapi
+  tasks:
+    - name: 1- create folders CFG
+      file:
+        path: "CFGS/{{ inventory_hostname }}/"
+        state: directory
+      tags: create_folders
+
+    - name: 2- create folders DIFFS
+      file:
+        path: "DIFFS/"
+        state: directory
+      tags: create_folders
+
+    - name: 3- generate interface config
+      template:
+        src: "../../nornir/templates/eos-interface.j2"
+        dest: "CFGS/{{ inventory_hostname }}/1-interface.txt"
+
+    - name: 4- generate acl config
+      template:
+        src: "../../nornir/templates/eos-acl.j2"
+        dest: "CFGS/{{ inventory_hostname }}/2-acl.txt"
+
+    - name: 5- generate static route config
+      template:
+        src: "../../nornir/templates/eos-staticroute.j2"
+        dest: "CFGS/{{ inventory_hostname }}/3-staticroute.txt"
+
+    - name: 6- generate prefix-list config
+      template:
+        src: "../../nornir/templates/eos-prefixlist.j2"
+        dest: "CFGS/{{ inventory_hostname }}/4-prefix.txt"
+
+    - name: 7- generate route-map config
+      template:
+        src: "../../nornir/templates/eos-routemap.j2"
+        dest: "CFGS/{{ inventory_hostname }}/5-routemap.txt"
+
+    - name: 8- generate bgp config
+      template:
+        src: "../../nornir/templates/eos-bgp.j2"
+        dest: "CFGS/{{ inventory_hostname }}/6-bgp.txt"
+
+    - name: 9- generate isis config
+      template:
+        src: "../../nornir/templates/eos-isis.j2"
+        dest: "CFGS/{{ inventory_hostname }}/7-isis.txt"
+
+    - name: 10- merge all configs in one file
+      assemble:
+        src: "CFGS/{{ inventory_hostname }}/" 
+        dest: "CFGS/{{ inventory_hostname }}-full.txt"
+
+    - name: 11- push config
+      debugger: on_failed
+      eos_config:
+        #src: "{{playbook_dir}}/../CFGS/{{ inventory_hostname }}-full.txt"
+        src: "../CFGS/{{ inventory_hostname }}-full.txt"
+        backup: yes
+      register: load_config
+      tags: push_config
+
+    - name: 12- display result
+      debug:
+        msg: "Backup file is {{ load_config.shortname }} and result is: {{ load_config }}"
+      tags: push_config
+

@@ -1,3 +1,6 @@
 nornir/ntc-templates
 nornir/nornir.log
 *.cast
+ansible/CFGS
+ansible/host_vars
+ansible/playbooks/backup

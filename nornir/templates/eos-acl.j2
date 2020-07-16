@@ -1,0 +1,50 @@
+{% for acl in acls %}
+{# CHECKING IF EXTENDED ACL: source and destination #}
+{% if acl.type == "extended" %}
+{# --1- Check if we want to delete the config  ---- #}
+{% if acl.delete is defined and acl.delete == "yes" %}
+no ip access-list {{ acl.name }}
+{% else %}
+{# --2- start ACL config  ---- #}
+ip access-list {{ acl.name }}
+{% for line in acl.entries %}
+{% if line.srcprefix == "any" %}
+{% set srcip = "any" %}
+{% elif line.srcprefixlen == '32' %}
+{% set srcip = 'host ' + line.srcprefix %}
+{% else %}
+{% set srcip = line.srcprefix + '/' + line.srcprefixlen %}
+{% endif %}
+{% if line.dstprefix == "any" %}
+{% set dstip = "any" %}
+{% elif line.dstprefixlen == '32' %}
+{% set dstip = 'host ' + line.dstprefix %}
+{% else %}
+{% set dstip = line.dstprefix + '/' + line.dstprefixlen %}
+{% endif %}
+{% if line.application is defined %}
+{% set appeq = 'eq ' + line.application %}
+{% else %}
+{% set appeq = "" %}
+{% endif %}
+   {{ line.seqno }} {{ line.action }} {{ line.protocol }} {{ srcip }} {{ dstip }} {{ appeq }}
+{% endfor %}
+{% endif %}
+{% else %}
+{# GENERATING STANDARD ACL: only source #}
+{% if acl.delete is defined and acl.delete == "yes" %}
+no ip access-list standard{{ acl.name }}
+{% else %}
+ip access-list standard {{ acl.name }}
+{% for line in acl.entries %}
+{% if line.srcprefix == "any" %}
+{% set srcip = "any" %}
+{% else %}
+{% set srcip = line.srcprefix + '/' + line.srcprefixlen %}
+{% endif %}
+   {{ line.seqno }} {{ line.action }} {{ srcip }}
+{% endfor %}
+{% endif -%} 
+{% endif -%} 
+!
+{% endfor %}

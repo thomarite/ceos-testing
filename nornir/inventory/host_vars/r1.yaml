@@ -1,4 +1,53 @@
 ---
+acls:
+- entries:
+  - action: permit
+    dstprefix: 10.0.0.0
+    dstprefixlen: '24'
+    protocol: ip
+    seqno: 10
+    srcprefix: 10.0.0.0
+    srcprefixlen: '24'
+  name: ACL-TEST-IN
+  type: extended
+
+ethernet:
+- description: "CORE: to-r2-e1"
+  et: '1'
+  ipadd: 10.0.12.1
+  iplen: '30'
+  switchport: 'no'
+- description: "CORE: to-r3-e1"
+  et: '2'
+  ipadd: 10.0.13.1
+  iplen: '30'
+  switchport: 'no'
+
+prefixlists:
+- entries:
+  - action: permit
+    prefix: 192.168.1.0
+    prefixlen: '24'
+    seqno: 10
+  name: PL-TEST
+
+routemaps:
+- entries:
+  - action: permit
+    match: ip address prefix-list PL-TEST
+    seqno: 10
+    set: local-preference 150
+  - action: deny
+    seqno: 100
+  name: RM-TEST-IN
+
+staticroutes:
+- name: TEST-STATIC-ROUTE
+  nexthop: 10.0.12.2
+  prefix: 11.11.11.11
+  prefixlen: '32'
+  tag: '1000'
+
 bgp:
   asn: 100
   router_id: "10.0.0.1"

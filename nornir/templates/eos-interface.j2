@@ -1,0 +1,70 @@
+{% for inter in ethernet %}
+interface Ethernet{{ inter.et }}
+{# ---- This part is common to all interfaces ---- #}
+{# --1- Check if we want to delete the config for this interface  ---- #}
+{% if inter.delete is defined and inter.delete == "yes" %}
+{% set delete = "no " %}
+{% else %}
+{% set delete = "" %}
+{% endif %}
+{# ---- Start Interface configuration ---- #}
+{% if inter.description is defined %}
+   {{ delete }}description {{ inter.description }}
+{% endif %}
+{% if inter.loadinterval is defined %}
+   load-interval {{ inter.loadinterval }}
+{% endif %}
+{# ---- This part is mainly for onboarding where we need IP ports --- #}
+{% if inter.switchport is defined and inter.switchport == "no" %}
+   no switchport
+{% if inter.ipadd is defined and inter.iplen is defined %}
+   {{ delete }}ip address {{ inter.ipadd }}/{{ inter.iplen }}
+{% endif %}
+{% if inter.aclin is defined %}
+   {{ delete }}ip access-group {{ inter.aclin }} in
+{% endif %}
+{% if inter.vrrp is defined %}
+{% for entry in inter.vrrp %}
+   {{ delete }}vrrp {{ entry.group }} priority {{ entry.priority }}
+   {{ delete }}vrrp {{ entry.group }} preempt delay reload {{ entry.reload }}
+   {{ delete }}vrrp {{ entry.group }} authentication text {{ entry.auth }}
+   {{ delete }}vrrp {{ entry.group }} ip {{ entry.ipadd }}
+{% endfor %}
+{% endif %}
+{% if inter.mcboundary is defined %}
+   {{ delete }}ip multicast boundary {{ inter.mcboundary }} out
+{% endif %}
+{% if inter.pim is defined %}
+   {{ delete }}ip pim {{ inter.pim }}
+{% endif %}
+{% endif %}
+{# ---- This part is mainly for connecting to servers that is L2 ---- #}
+{% if inter.trunk is defined %}
+   {{ delete }}switchport trunk allowed vlan {{ inter.trunk }}
+   {{ delete }}switchport mode trunk
+{% endif %}
+{% if inter.access is defined %}
+   {{ delete }}switchport access vlan {{ inter.access }}
+{% endif %}
+{% if inter.po is defined %}
+   {{ delete }}channel-group {{ inter.po }} mode active
+{% endif %}
+{% if inter.lacp_rate is defined %}
+   {{ delete }}lacp rate {{ inter.lacp_rate }}
+{% endif %}
+{% if inter.queue_monitor is defined %}
+   queue-monitor length thresholds {{ inter.queue_monitor }}
+{% endif %}
+{% if inter.tx_preemphasis is defined %}
+   tx-preemphasis {{ inter.tx_preemphasis }}
+{% endif %}
+{% if inter.portfast is defined %}
+   spanning-tree portfast
+{% endif %}
+{% if inter.shutdown is defined and inter.shutdown == "yes" %}
+   shutdown
+{% else %}
+   no shutdown
+{% endif %}
+!
+{% endfor %}

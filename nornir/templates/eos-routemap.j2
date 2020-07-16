@@ -1,0 +1,26 @@
+{% if routemaps is defined %}
+!
+{% for item in routemaps %}
+{% set name = item.name %}
+{% if item.delete is defined and item.delete == "yes" %}
+no route-map {{ name }}
+{% else %}
+{% for entry in item.entries %}
+route-map {{ name }} {{ entry.action }} {{ entry.seqno }}
+{% if entry.match is defined %}
+   match {{ entry.match }}
+{% endif %}
+{% if entry.metric is defined %}
+   set metric {{ entry.metric }}
+{% endif %}
+{% if entry.local_pref is defined %}
+   set local-preference {{ entry.local_pref }}
+{% endif %}
+{% if entry.set is defined %}
+   set {{ entry.set }}
+{% endif %}
+!
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
