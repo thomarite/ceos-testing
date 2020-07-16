@@ -10,6 +10,7 @@
    * [TEXTFSM](#textfsm)
    * [Netbox](#netbox)
    * [Ansible](#ansible)
+   * [Jinja2](#jinja2)
    * [Openconfig](#openconfig)
    * [To-Do](#to-do)
    * [Diagrams](#diagrams)
@@ -316,6 +317,14 @@ So I have some basic playbooks to collect facts using SSH and EAPI (recommended 
 
 One thing I noticed, if you use [eos_command](https://docs.ansible.com/ansible/latest/modules/eos_command_module.html) with transport httpapi, you receive the output in no-json format. Although, if you test anything command in the device eapi browser, you always get the ouput in json. In Arista you can get the output of commands in json just adding "| json". It seems that you can add the option "outout: json" in ansible. A bit more info [here](https://github.com/ansible/ansible/issues/31346) 
 
+
+# Jinja2
+
+Via [blog](https://blog.thomarite.uk/index.php/2020/07/15/jinja2/):
+
+Whitespace control [here](https://ttl255.com/jinja2-tutorial-part-3-whitespace-control/)
+
+[Online parser](https://j2live.ttl255.com/)
 
 # Openconfig
 
