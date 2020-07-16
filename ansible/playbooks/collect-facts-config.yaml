@@ -1,0 +1,22 @@
+---
+- name: Gather  config and store it
+  hosts: ceoslab
+  connection: httpapi
+  gather_facts: false
+
+  tasks:
+    - name: Create output directory (if missing)
+      file:
+        path: "{{playbook_dir}}/devices-config"
+        state: directory
+
+    - name: Collect facts and take only config
+      eos_facts:
+        gather_subset:
+          - config
+      register: facts
+
+    - name: copy collected configuration in configuration/text directory
+      copy:
+        content: "{{ facts.ansible_facts.ansible_net_config }}"
+        dest: "{{ playbook_dir }}/devices-config/{{ inventory_hostname }}.conf"

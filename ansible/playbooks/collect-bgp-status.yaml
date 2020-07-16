@@ -1,0 +1,17 @@
+---
+- name: Gather show ip bgp summary
+  hosts: ceoslab
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - name: Collect BGP Status
+      eos_command:
+        commands:
+          - show ip bgp summary vrf all | json
+      register: bgp_status
+
+    - name: Display result
+      debug:
+        msg: "Peering with {{item.key}} is {{item.value.peerState}}"
+      with_dict: "{{bgp_status.stdout[0].vrfs['default'].peers}}"
