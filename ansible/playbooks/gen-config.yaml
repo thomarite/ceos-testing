@@ -9,12 +9,6 @@
         state: directory
       tags: create_folders
 
-    - name: 2- create folders DIFFS
-      file:
-        path: "DIFFS/"
-        state: directory
-      tags: create_folders
-
     - name: 3- generate interface config
       template:
         src: "../../nornir/templates/eos-interface.j2"
@@ -64,8 +58,7 @@
       register: load_config
       tags: push_config
 
-    - name: 12- display result
+    - name: 12- - display result
       debug:
         msg: "Backup file is {{ load_config.shortname }} and result is: {{ load_config }}"
       tags: push_config
-

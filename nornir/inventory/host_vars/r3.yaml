@@ -1,4 +1,16 @@
 ---
+ethernet:
+- description: "CORE: to-r1-e2"
+  et: '1'
+  ipadd: 10.0.13.2
+  iplen: '30'
+  switchport: 'no'
+- description: "CORE: to-r2-e2"
+  et: '2'
+  ipadd: 10.0.23.2
+  iplen: '30'
+  switchport: 'no'
+
 bgp:
   asn: 100
   router_id: "10.0.0.3"
