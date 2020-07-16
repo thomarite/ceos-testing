@@ -298,17 +298,23 @@ The file structure:
 │   └── ceoslab.yaml
 └── playbooks
     ├── collect-facts-cli.yaml
-    └── collect-facts-eapi.yaml
+    ├── collect-facts-config.yaml
+    ├── collect-facts-http.yaml
+    ├── collect-routes.yaml
+    ├── collect-bgp-status.yaml
+
 ```
 
-So I have two basic playbooks to collect facts using SSH and EAPI (recommended to use -vvv for extra logging...)
+So I have some basic playbooks to collect facts using SSH and EAPI (recommended to use -vvv for extra logging...) and run commands
 
 ```
-/ansible master$ ansible-playbook playbooks/collect-facts-eapi.yaml -vvv
+/ansible master$ ansible-playbook playbooks/collect-facts-http.yaml -vvv
 /ansible master$ ansible-playbook playbooks/collect-facts-cli.yaml -vvv
+/ansible master$ ansible-playbook playbooks/collect-bgp-status.yaml --limit="r1"
+/ansible master$ ansible-playbook playbooks/collect-routes.yaml --limit="r1"
 ```
 
-I will try to add more examples.
+One thing I noticed, if you use [eos_command](https://docs.ansible.com/ansible/latest/modules/eos_command_module.html) with transport httpapi, you receive the output in no-json format. Although, if you test anything command in the device eapi browser, you always get the ouput in json. In Arista you can get the output of commands in json just adding "| json". It seems that you can add the option "outout: json" in ansible. A bit more info [here](https://github.com/ansible/ansible/issues/31346) 
 
 
 # Openconfig
