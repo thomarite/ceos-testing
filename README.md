@@ -10,6 +10,7 @@
    * [TEXTFSM](#textfsm)
    * [Netbox](#netbox)
    * [Ansible](#ansible)
+      * [Ansible Troubleshooting](#ansible-troubleshooting) 
    * [Jinja2](#jinja2)
    * [Openconfig](#openconfig)
    * [To-Do](#to-do)
@@ -317,6 +318,25 @@ So I have some basic playbooks to collect facts using SSH and EAPI (recommended 
 
 One thing I noticed, if you use [eos_command](https://docs.ansible.com/ansible/latest/modules/eos_command_module.html) with transport httpapi, you receive the output in no-json format. Although, if you test anything command in the device eapi browser, you always get the ouput in json. In Arista you can get the output of commands in json just adding "| json". It seems that you can add the option "outout: json" in ansible. A bit more info [here](https://github.com/ansible/ansible/issues/31346) 
 
+Generate and push config. Using jinja templates from nornir folder.
+
+```
+/ansible master$ ansible-playbook playbooks/gen-config.yaml --limit="r1"
+```
+
+Keep in mind that host_vars is a soft link to nornir:
+
+```
+ansible $ ls -ltr | grep host_vars
+lrwxrwxrwx 1 x x  29 Jul 16 13:58 host_vars -> ../nornir/inventory/host_vars
+```
+
+
+### Ansible Troubleshooting
+
+After trying to generate and push config using eos_config.
+
+Details [here](https://blog.thomarite.uk/index.php/2020/07/16/ansible-troubleshooting-2)
 
 # Jinja2
 
