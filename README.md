@@ -13,6 +13,7 @@
       * [Ansible Troubleshooting](#ansible-troubleshooting) 
    * [Jinja2](#jinja2)
    * [Openconfig](#openconfig)
+   * [Monitoring](#monitoring)
    * [To-Do](#to-do)
    * [Diagrams](#diagrams)
    * [Other](#other)
@@ -482,6 +483,10 @@ This is my final dir tree
             └── vars
                 └── desired_openconfig_modules.yml
 ```
+
+# Monitoring
+
+I managed to get influxdb-telegraf-grafana working for this ceos lab and it is [documented](https://blog.thomarite.uk/index.php/2020/07/17/monitoring-influxdb-telegraf-grafana). I dont have anything automated with ansible :(
 
 # To-Do
 
