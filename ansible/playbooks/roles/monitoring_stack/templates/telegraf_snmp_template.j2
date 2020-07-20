@@ -1,0 +1,418 @@
+# Telegraf Configuration
+#
+# Telegraf is entirely plugin driven. All metrics are gathered from the
+# declared inputs, and sent to the declared outputs.
+#
+# Plugins must be declared in here to be active.
+# To deactivate a plugin, comment out the name and any variables.
+#
+# Use 'telegraf -config telegraf.conf -test' to see what metrics a config
+# file would generate.
+#
+# Environment variables can be used anywhere in this config file, simply surround
+# them with ${}. For strings the variable must be within quotes (ie, "${STR_VAR}"),
+# for numbers and booleans they should be plain (ie, ${INT_VAR}, ${BOOL_VAR})
+
+
+# Global tags can be specified here in key="value" format.
+[global_tags]
+  # dc = "us-east-1" # will tag all metrics with dc=us-east-1
+  # rack = "1a"
+  ## Environment variables can be used as tags, and throughout the config file
+  # user = "$USER"
+
+
+# Configuration for telegraf agent
+[agent]
+  ## Default data collection interval for all inputs
+  interval = "10s"
+  ## Rounds collection interval to 'interval'
+  ## ie, if interval="10s" then always collect on :00, :10, :20, etc.
+  round_interval = true
+
+  ## Telegraf will send metrics to outputs in batches of at most
+  ## metric_batch_size metrics.
+  ## This controls the size of writes that Telegraf sends to output plugins.
+  metric_batch_size = 1000
+
+  ## Maximum number of unwritten metrics per output.  Increasing this value
+  ## allows for longer periods of output downtime without dropping metrics at the
+  ## cost of higher maximum memory usage.
+  metric_buffer_limit = 10000
+
+  ## Collection jitter is used to jitter the collection by a random amount.
+  ## Each plugin will sleep for a random time within jitter before collecting.
+  ## This can be used to avoid many plugins querying things like sysfs at the
+  ## same time, which can have a measurable effect on the system.
+  collection_jitter = "0s"
+
+  ## Default flushing interval for all outputs. Maximum flush_interval will be
+  ## flush_interval + flush_jitter
+  flush_interval = "10s"
+  ## Jitter the flush interval by a random amount. This is primarily to avoid
+  ## large write spikes for users running a large number of telegraf instances.
+  ## ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
+  flush_jitter = "0s"
+
+  ## By default or when set to "0s", precision will be set to the same
+  ## timestamp order as the collection interval, with the maximum being 1s.
+  ##   ie, when interval = "10s", precision will be "1s"
+  ##       when interval = "250ms", precision will be "1ms"
+  ## Precision will NOT be used for service inputs. It is up to each individual
+  ## service input to set the timestamp at the appropriate precision.
+  ## Valid time units are "ns", "us" (or "µs"), "ms", "s".
+  precision = ""
+
+  ## Log at debug level.
+  # debug = false
+  ## Log only error level messages.
+  # quiet = false
+
+  ## Log target controls the destination for logs and can be one of "file",
+  ## "stderr" or, on Windows, "eventlog".  When set to "file", the output file
+  ## is determined by the "logfile" setting.
+  # logtarget = "file"
+
+  ## Name of the file to be logged to when using the "file" logtarget.  If set to
+  ## the empty string then logs are written to stderr.
+  # logfile = ""
+
+  ## The logfile will be rotated after the time interval specified.  When set
+  ## to 0 no time based rotation is performed.  Logs are rotated only when
+  ## written to, if there is no log activity rotation may be delayed.
+  # logfile_rotation_interval = "0d"
+
+  ## The logfile will be rotated when it becomes larger than the specified
+  ## size.  When set to 0 no size based rotation is performed.
+  # logfile_rotation_max_size = "0MB"
+
+  ## Maximum number of rotated archives to keep, any older logs are deleted.
+  ## If set to -1, no archives are removed.
+  # logfile_rotation_max_archives = 5
+
+  ## Override default hostname, if empty use os.Hostname()
+  hostname = ""
+  ## If set to true, do no set the "host" tag in the telegraf agent.
+  omit_hostname = false
+
+
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
+
+
+# Configuration for sending metrics to InfluxDB
+[[outputs.influxdb]]
+  ## The full HTTP or UDP URL for your InfluxDB instance.
+  ##
+  ## Multiple URLs can be specified for a single cluster, only ONE of the
+  ## urls will be written to each interval.
+  urls = ["https://{{ influxdb_inspect.ansible_facts.docker_container.NetworkSettings.Networks.monitoring.IPAddress }}:8086"]
+
+  ## The target database for metrics; will be created as needed.
+  ## For UDP url endpoint database needs to be configured on server side.
+  database = "{{ var_influxdb.db_name.snmp }}"
+
+  ## The value of this tag will be used to determine the database.  If this
+  ## tag is not set the 'database' option is used as the default.
+  # database_tag = ""
+
+  ## If true, the 'database_tag' will not be included in the written metric.
+  # exclude_database_tag = false
+
+  ## If true, no CREATE DATABASE queries will be sent.  Set to true when using
+  ## Telegraf with a user without permissions to create databases or when the
+  ## database already exists.
+  skip_database_creation = false
+
+  ## Name of existing retention policy to write to.  Empty string writes to
+  ## the default retention policy.  Only takes effect when using HTTP.
+  # retention_policy = ""
+
+  ## The value of this tag will be used to determine the retention policy.  If this
+  ## tag is not set the 'retention_policy' option is used as the default.
+  # retention_policy_tag = ""
+
+  ## If true, the 'retention_policy_tag' will not be included in the written metric.
+  # exclude_retention_policy_tag = false
+
+  ## Write consistency (clusters only), can be: "any", "one", "quorum", "all".
+  ## Only takes effect when using HTTP.
+  # write_consistency = "any"
+
+  ## Timeout for HTTP messages.
+  # timeout = "5s"
+
+  ## HTTP Basic Auth
+  username = "{{ var_influxdb.username }}"
+  password = "{{ var_influxdb.password }}"
+
+  ## HTTP User-Agent
+  # user_agent = "telegraf"
+
+  ## UDP payload size is the maximum packet size to send.
+  # udp_payload = "512B"
+
+  ## Optional TLS Config for use on HTTP connections.
+  # tls_ca = "/etc/telegraf/ca.pem"
+  # tls_cert = "/etc/telegraf/cert.pem"
+  # tls_key = "/etc/telegraf/key.pem"
+  ## Use TLS but skip chain & host verification
+  insecure_skip_verify = true
+
+  ## HTTP Proxy override, if unset values the standard proxy environment
+  ## variables are consulted to determine which proxy, if any, should be used.
+  # http_proxy = "http://corporate.proxy:3128"
+
+  ## Additional HTTP headers
+  # http_headers = {"X-Special-Header" = "Special-Value"}
+
+  ## HTTP Content-Encoding for write request body, can be set to "gzip" to
+  ## compress body or "identity" to apply no encoding.
+  # content_encoding = "identity"
+
+  ## When true, Telegraf will output unsigned integers as unsigned values,
+  ## i.e.: "42u".  You will need a version of InfluxDB supporting unsigned
+  ## integer values.  Enabling this option will result in field type errors if
+  ## existing data has been written.
+  # influx_uint_support = false
+
+
+
+
+# # Configuration for Syslog server to send metrics to
+# [[outputs.syslog]]
+#   ## URL to connect to
+#   ## ex: address = "tcp://127.0.0.1:8094"
+#   ## ex: address = "tcp4://127.0.0.1:8094"
+#   ## ex: address = "tcp6://127.0.0.1:8094"
+#   ## ex: address = "tcp6://[2001:db8::1]:8094"
+#   ## ex: address = "udp://127.0.0.1:8094"
+#   ## ex: address = "udp4://127.0.0.1:8094"
+#   ## ex: address = "udp6://127.0.0.1:8094"
+#   address = "tcp://127.0.0.1:8094"
+#
+#   ## Optional TLS Config
+#   # tls_ca = "/etc/telegraf/ca.pem"
+#   # tls_cert = "/etc/telegraf/cert.pem"
+#   # tls_key = "/etc/telegraf/key.pem"
+#   ## Use TLS but skip chain & host verification
+#   # insecure_skip_verify = false
+#
+#   ## Period between keep alive probes.
+#   ## Only applies to TCP sockets.
+#   ## 0 disables keep alive probes.
+#   ## Defaults to the OS configuration.
+#   # keep_alive_period = "5m"
+#
+#   ## The framing technique with which it is expected that messages are
+#   ## transported (default = "octet-counting").  Whether the messages come
+#   ## using the octect-counting (RFC5425#section-4.3.1, RFC6587#section-3.4.1),
+#   ## or the non-transparent framing technique (RFC6587#section-3.4.2).  Must
+#   ## be one of "octet-counting", "non-transparent".
+#   # framing = "octet-counting"
+#
+#   ## The trailer to be expected in case of non-trasparent framing (default = "LF").
+#   ## Must be one of "LF", or "NUL".
+#   # trailer = "LF"
+#
+#   ## SD-PARAMs settings
+#   ## Syslog messages can contain key/value pairs within zero or more
+#   ## structured data sections.  For each unrecognised metric tag/field a
+#   ## SD-PARAMS is created.
+#   ##
+#   ## Example:
+#   ##   [[outputs.syslog]]
+#   ##     sdparam_separator = "_"
+#   ##     default_sdid = "default@32473"
+#   ##     sdids = ["foo@123", "bar@456"]
+#   ##
+#   ##   input => xyzzy,x=y foo@123_value=42,bar@456_value2=84,something_else=1
+#   ##   output (structured data only) => [foo@123 value=42][bar@456 value2=84][default@32473 something_else=1 x=y]
+#
+#   ## SD-PARAMs separator between the sdid and tag/field key (default = "_")
+#   # sdparam_separator = "_"
+#
+#   ## Default sdid used for tags/fields that don't contain a prefix defined in
+#   ## the explict sdids setting below If no default is specified, no SD-PARAMs
+#   ## will be used for unrecognised field.
+#   # default_sdid = "default@32473"
+#
+#   ## List of explicit prefixes to extract from tag/field keys and use as the
+#   ## SDID, if they match (see above example for more details):
+#   # sdids = ["foo@123", "bar@456"]
+#
+#   ## Default severity value. Severity and Facility are used to calculate the
+#   ## message PRI value (RFC5424#section-6.2.1).  Used when no metric field
+#   ## with key "severity_code" is defined.  If unset, 5 (notice) is the default
+#   # default_severity_code = 5
+#
+#   ## Default facility value. Facility and Severity are used to calculate the
+#   ## message PRI value (RFC5424#section-6.2.1).  Used when no metric field with
+#   ## key "facility_code" is defined.  If unset, 1 (user-level) is the default
+#   # default_facility_code = 1
+#
+#   ## Default APP-NAME value (RFC5424#section-6.2.5)
+#   ## Used when no metric tag with key "appname" is defined.
+#   ## If unset, "Telegraf" is the default
+#   # default_appname = "Telegraf"
+
+
+
+
+###############################################################################
+#                            PROCESSOR PLUGINS                                #
+###############################################################################
+
+
+
+
+###############################################################################
+#                            AGGREGATOR PLUGINS                               #
+###############################################################################
+
+
+
+
+###############################################################################
+#                            INPUT PLUGINS                                    #
+###############################################################################
+
+
+# Read metrics about cpu usage
+[[inputs.cpu]]
+  ## Whether to report per-cpu stats or not
+  percpu = true
+  ## Whether to report total system cpu stats or not
+  totalcpu = true
+  ## If true, collect raw CPU time metrics.
+  collect_cpu_time = false
+  ## If true, compute and report the sum of all non-idle CPU states.
+  report_active = false
+
+
+# Read metrics about disk usage by mount point
+[[inputs.disk]]
+  ## By default stats will be gathered for all mount points.
+  ## Set mount_points will restrict the stats to only the specified mount points.
+  # mount_points = ["/"]
+
+  ## Ignore mount points by filesystem type.
+  ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
+
+
+# Get kernel statistics from /proc/stat
+[[inputs.kernel]]
+  # no configuration
+
+
+# Read metrics about memory usage
+[[inputs.mem]]
+  # no configuration
+
+
+# Get the number of processes and group them by status
+[[inputs.processes]]
+  # no configuration
+
+
+# Read metrics about swap memory usage
+[[inputs.swap]]
+  # no configuration
+
+
+# Read metrics about system load & uptime
+[[inputs.system]]
+  ## Uncomment to remove deprecated metrics.
+  # fielddrop = ["uptime_format"]
+
+
+
+# # Retrieves SNMP values from remote agents
+# [[inputs.snmp]]
+#   ## Agent addresses to retrieve values from.
+#   ##   example: agents = ["udp://127.0.0.1:161"]
+#   ##            agents = ["tcp://127.0.0.1:161"]
+    agents = ["udp://172.27.0.2:161","udp://172.27.0.3:161","udp://172.27.0.4:161"]
+#
+#   ## Timeout for each request.
+    timeout = "5s"
+#
+#   ## SNMP version; can be 1, 2, or 3.
+    version = 2
+#
+#   ## SNMP community string.
+    community = {{ var_influxdb.snmp_community }}
+#
+#   ## Number of retries to attempt.
+    retries = 3
+#
+#   ## The GETBULK max-repetitions parameter.
+#   # max_repetitions = 10
+#
+#   ## SNMPv3 authentication and encryption options.
+#   ##
+#   ## Security Name.
+#   # sec_name = "myuser"
+#   ## Authentication protocol; one of "MD5", "SHA", or "".
+#   # auth_protocol = "MD5"
+#   ## Authentication password.
+#   # auth_password = "pass"
+#   ## Security Level; one of "noAuthNoPriv", "authNoPriv", or "authPriv".
+#   # sec_level = "authNoPriv"
+#   ## Context Name.
+#   # context_name = ""
+#   ## Privacy protocol used for encrypted messages; one of "DES", "AES" or "".
+#   # priv_protocol = ""
+#   ## Privacy password used for encrypted messages.
+#   # priv_password = ""
+#
+#   ## Add fields and tables defining the variables you wish to collect.  This
+#   ## example collects the system uptime and interface variables.  Reference the
+#   ## full plugin documentation for configuration details.
+
+  [[inputs.snmp.field]]
+    name = "hostname"
+    oid = "RFC1213-MIB::sysName.0"
+    is_tag = true
+
+  [[inputs.snmp.field]]
+    name = "uptime"
+    oid = "DISMAN-EVENT-MIB::sysUpTimeInstance"
+
+  # IF-MIB::ifTable contains counters on input and output traffic as well as errors and discards.
+  [[inputs.snmp.table]]
+    name = "interface"
+    inherit_tags = [ "hostname" ]
+    oid = "IF-MIB::ifTable"
+
+    # Interface tag - used to identify interface in metrics database
+    [[inputs.snmp.table.field]]
+      name = "ifDescr"
+      oid = "IF-MIB::ifDescr"
+      is_tag = true
+
+  # IF-MIB::ifXTable contains newer High Capacity (HC) counters that do not overflow as fast for a few of the ifTable counters
+  [[inputs.snmp.table]]
+    name = "interfaceX"
+    inherit_tags = [ "hostname" ]
+    oid = "IF-MIB::ifXTable"
+
+    # Interface tag - used to identify interface in metrics database
+    [[inputs.snmp.table.field]]
+      name = "ifDescr"
+      oid = "IF-MIB::ifDescr"
+      is_tag = true
+
+  # EtherLike-MIB::dot3StatsTable contains detailed ethernet-level information about what kind of errors have been logged on an interface (such as FCS error, frame too long, etc)
+  [[inputs.snmp.table]]
+    name = "interface"
+    inherit_tags = [ "hostname" ]
+    oid = "EtherLike-MIB::dot3StatsTable"
+
+    # Interface tag - used to identify interface in metrics database
+    [[inputs.snmp.table.field]]
+      name = "name"
+      oid = "IF-MIB::ifDescr"
+      is_tag = true
+

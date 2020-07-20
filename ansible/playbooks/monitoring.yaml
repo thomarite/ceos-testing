@@ -1,0 +1,10 @@
+---
+- hosts: monitoring
+  gather_facts: yes
+  connection: local
+  roles:
+      - monitoring_stack
+  tags:
+    - tag_influxdb
+    - tag_grafana
+...

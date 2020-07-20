@@ -1,0 +1,124 @@
+---
+- name: 1- CONTAINER INFLUXDB // CREATING FOLDER 
+  file:
+      dest: "{{ path_to_containers }}/influxdb"
+      state: directory
+  tags:
+      - tag_influx
+
+- name: 2- CONTAINER INFLUXDB // CREATING STORAGE FOLDER
+  file:
+      dest: "{{ path_to_containers }}/influxdb/data"
+      state: directory
+  tags:
+      - tag_influx
+
+- name: 3- CONTAINER INFLUXDB // GENERATING INFLUXDB CONFIG
+  shell: "docker run --rm influxdb influxd config > {{ path_to_containers }}/influxdb/influxdb.conf"
+  become: yes
+  tags:
+      - tag_influx
+
+- name: 4- CONTAINER INFLUXDB // LAUNCHING CONTAINER
+  docker_container:
+      name: influxdb
+      image: influxdb
+      state: started
+      command: "-config /etc/influxdb/influxdb.conf"
+      networks:
+          - name: "{{ docker_mon_net.name }}"
+      purge_networks: yes
+      ports:
+          - "8086:8086"
+      volumes:
+          - "{{ path_to_containers }}/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro"
+          - "{{ path_to_containers }}/influxdb/data:/var/lib/influxdb"
+  become: yes
+  tags:
+      - tag_influx
+
+- name: 5- CONTAINER INFLUXDB // WAITING CONTAINER TO BOOT
+  pause:
+      seconds: 15
+  tags:
+      - tag_influx
+
+- name: 6- CONTAINER INFLUXDB // CREATING DATABASE FOR SNMP
+  uri:
+      url: "http://localhost:8086/query?q={{ db_request | urlencode }}"
+      method: POST
+  ignore_errors: yes
+  vars:
+      db_request: "CREATE DATABASE {{ var_influxdb.db_name.snmp }}"
+  tags:
+      - tag_influx
+ 
+- name: 7- CONTAINER INFLUXDB // CREATING DATABASE FOR SYSLOG
+  uri:
+      url: "http://localhost:8086/query?q={{ db_request | urlencode }}"
+      method: POST
+  ignore_errors: yes
+  vars:
+      db_request: "CREATE DATABASE {{ var_influxdb.db_name.syslog }}"
+  tags:
+      - tag_influx
+
+- name: 8- CONTAINER INFLUXDB // CREATING USERS
+  uri:
+      url: "http://localhost:8086/query?q={{ db_request | urlencode }}"
+      method: POST
+  ignore_errors: yes
+  vars:
+      db_request: "CREATE USER {{ var_influxdb.username }} WITH PASSWORD '{{ var_influxdb.password }}' WITH ALL PRIVILEGES"
+  tags:
+      - tag_influx
+
+- name: 9- CONTAINER INFLUXDB // GENERATING SSL CERTIFICATE
+  shell: 'docker exec -i influxdb openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/influxdb-selfsigned.key -out /etc/ssl/influxdb-selfsigned.crt -days 365 -subj "/C=GB/ST=LDN/L=LDN/O=domain.com/CN=influxdb.domain.com"'
+  become: yes
+  tags:
+      - tag_influx
+
+- name: 10- CONTAINER INFLUXDB // ENABLING HTTPS
+  lineinfile:
+      dest: "{{ path_to_containers }}/influxdb/influxdb.conf"
+      regexp: 'https-enabled = false'
+      line: 'https-enabled = true'
+  tags:
+      - tag_influx
+
+- name: 11- CONTAINER INFLUXDB // PROVIDING CERTIFICATE PATH
+  lineinfile:
+      dest: "{{ path_to_containers }}/influxdb/influxdb.conf"
+      regexp: 'https-certificate = "/etc/ssl/influxdb.pem"'
+      line: 'https-certificate = "/etc/ssl/influxdb-selfsigned.crt"'
+  tags:
+      - tag_influx
+
+- name: 12- CONTAINER INFLUXDB // PROVIDING KEY PATH
+  lineinfile:
+      dest: "{{ path_to_containers }}/influxdb/influxdb.conf"
+      regexp: 'https-private-key = ""'
+      line: 'https-private-key = "/etc/ssl/influxdb-selfsigned.key"'
+  tags:
+      - tag_influx
+
+- name: 13- CONTAINER INFLUXDB // RESTARTING CONTAINER
+  docker_container:
+      name: influxdb
+      image: influxdb
+      state: started
+      restart: yes
+      command: "-config /etc/influxdb/influxdb.conf"
+      networks:
+          - name: "{{ docker_mon_net.name }}"
+      purge_networks: yes
+      ports:
+           - "8086:8086"
+      volumes:
+           - "{{ path_to_containers }}/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro"
+           - "{{ path_to_containers }}/influxdb/data:/var/lib/influxdb"
+  become: yes
+  tags:
+      - tag_influx
+...

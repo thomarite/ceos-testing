@@ -1,0 +1,138 @@
+---
+- name: 1- CONTAINER GRAFANA // CREATING FOLDER 
+  file:
+      dest: "{{ path_to_containers }}/grafana"
+      state: directory
+  tags:
+      - tag_grafana
+
+- name: 2- CONTAINER GRAFANA // CREATING STORAGE FOLDER
+  file:
+      dest: "{{ path_to_containers }}/grafana/data"
+      state: directory
+  tags:
+      - tag_grafana
+
+- name: 3- CONTAINER GRAFANA // GETTING IP OF INFLUXDB
+  docker_container:
+      name: influxdb
+  become: yes
+  register: influxdb_inspect
+  tags:
+      - tag_grafana
+
+- name: 4- CONTAINER GRAFANA // LAUNCHING CONTAINER
+  docker_container:
+      name: grafana
+      image: grafana/grafana
+      state: started
+      user: root
+      networks:
+          - name: "{{ docker_mon_net.name }}"
+      purge_networks: yes
+      ports:
+           - "3000:3000"
+      volumes:
+           - "{{ path_to_containers }}/grafana/data:/var/lib/grafana"
+  become: yes
+  tags:
+      - tag_grafana
+
+- name: 5- CONTAINER GRAFANA // GENERATING SSL CERTIFICATE
+  shell: 'docker exec -i grafana openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/grafana-selfsigned.key -out /etc/ssl/grafana-selfsigned.crt -days 365 -subj "/C=GB/ST=LDN/L=LDN/O=domain.com/CN=grafana.domain.com"'
+  become: yes
+  tags:
+      - tag_grafana
+
+- name: 6- CONTAINER GRAFANA // COPYING INITIAL CONFIGURATION FILE FROM GRAFANA
+  shell: "docker cp grafana:/etc/grafana/grafana.ini {{ path_to_containers }}/grafana/grafana.ini"
+  become: yes
+  tags:
+      - tag_grafana
+
+- name: 7- CONTAINER GRAFANA // ENABLING HTTPS
+  lineinfile:
+      dest: "{{ path_to_containers }}/grafana/grafana.ini"
+      regexp: ';protocol ='
+      line: 'protocol = https'
+  tags:
+      - tag_grafana
+
+- name: 8- CONTAINER GRAFANA // PROVIDING CERTIFICATE PATH
+  lineinfile:
+      dest: "{{ path_to_containers }}/grafana/grafana.ini"
+      regexp: '# https certs & key file'
+      line: 'cert_file = /etc/ssl/grafana-selfsigned.crt'
+  tags:
+      - tag_grafana
+
+- name: 9- CONTAINER GRAFANA // PROVIDING KEY PATH
+  lineinfile:
+      dest: "{{ path_to_containers }}/grafana/grafana.ini"
+      regexp: ';cert_key ='
+      line: 'cert_key = /etc/ssl/grafana-selfsigned.key'
+  tags:
+      - tag_grafana
+
+- name: 10- CONTAINER GRAFANA // COPYING INITIAL CONFIGURATION FILE FROM GRAFANA
+  shell: "docker cp {{ path_to_containers }}/grafana/grafana.ini grafana:/etc/grafana/grafana.ini"
+  become: yes
+  tags:
+      - tag_grafana
+
+- name: 11.1- CONTAINER GRAFANA // TEMPLATING DATASTORE SNMP
+  grafana_datasource:
+    name: "InfluxDB-SNMP"
+    org_id: "1"
+    grafana_url: "https://0.0.0.0:3000"
+    grafana_user: "{{ var_grafana.username  }}"
+    grafana_password: "{{ var_grafana.password }}"
+    ds_type: "influxdb"
+    ds_url: "https://{{ influxdb_inspect.ansible_facts.docker_container.NetworkSettings.Networks.monitoring.IPAddress }}:8086"
+    database: "snmp"
+    user: "{{ var_influxdb.username  }}"
+    password: "{{ var_influxdb.password  }}"
+    time_interval: ">10s"
+    tls_skip_verify: yes
+    validate_certs: no
+    is_default: yes
+  tags:
+      - tag_grafana
+
+- name: 11.2- CONTAINER GRAFANA // TEMPLATING DATASTORE SYSLOG
+  grafana_datasource:
+    name: "InfluxDB-SYSLOG"
+    org_id: "1"
+    grafana_url: "https://0.0.0.0:3000"
+    grafana_user: "{{ var_grafana.username  }}"
+    grafana_password: "{{ var_grafana.password }}"
+    ds_type: "influxdb"
+    ds_url: "https://{{ influxdb_inspect.ansible_facts.docker_container.NetworkSettings.Networks.monitoring.IPAddress }}:8086"
+    database: "syslog"
+    user: "{{ var_influxdb.username  }}"
+    password: "{{ var_influxdb.password  }}"
+    time_interval: ">10s"
+    tls_skip_verify: yes
+    validate_certs: no
+    is_default: no
+  tags:
+      - tag_grafana
+
+- name: 12- CONTAINER GRAFANA // RESTARTING CONTAINER
+  docker_container:
+      name: grafana
+      image: grafana/grafana
+      state: started
+      user: root
+      restart: yes
+      networks:
+          - name: "{{ docker_mon_net.name }}"
+      purge_networks: yes
+      ports:
+           - "3000:3000"
+      volumes:
+           - "{{ path_to_containers }}/grafana/data:/var/lib/grafana"
+  become: yes
+  tags:
+      - tag_grafana
+...

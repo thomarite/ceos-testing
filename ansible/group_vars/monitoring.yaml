@@ -1,0 +1,18 @@
+# Defaults for Docker containers
+docker_mon_net: 
+    name: monitoring
+    subnet: 172.18.0.0/16
+    gateway: 172.18.0.1
+path_to_containers: /home/tomas/storage/technology/monitoring-example
+var_influxdb:
+    username: tomas
+    password: tomas123
+    snmp_community: tomas123
+    db_name: 
+        snmp: snmp
+        syslog: syslog
+var_grafana:
+    username: admin
+    password: tomas123
+var_telegraf:
+...
