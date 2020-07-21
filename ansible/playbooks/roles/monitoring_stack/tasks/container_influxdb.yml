@@ -33,13 +33,18 @@
       volumes:
           - "{{ path_to_containers }}/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro"
           - "{{ path_to_containers }}/influxdb/data:/var/lib/influxdb"
+      log_driver: syslog
+      log_options:
+        syslog-address: "udp://172.18.0.4:6514"
+        tag: influxdb
+        syslog-format: rfc5424
   become: yes
   tags:
       - tag_influx
 
 - name: 5- CONTAINER INFLUXDB // WAITING CONTAINER TO BOOT
   pause:
-      seconds: 15
+      seconds: 5
   tags:
       - tag_influx
 

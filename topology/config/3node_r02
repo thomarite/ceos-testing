@@ -1,4 +1,4 @@
-! Startup-config last modified at  Fri Jul 17 11:13:53 2020 by root
+! Startup-config last modified at  Tue Jul 21 13:37:53 2020 by root
 ! device: r02 (cEOSLab, EOS-4.23.3M)
 !
 alias delta bash rm /.deltas/var/tmp/agents/core.*
@@ -19,11 +19,13 @@ agent PowerFuse shutdown
 agent StandbyCpld shutdown
 agent LicenseManager shutdown
 !
+logging format timestamp high-resolution
+logging format hostname fqdn
+!
 hostname r02
 !
 snmp-server location ceoslab
 snmp-server community tomas123 ro
-snmp-server host 172.17.0.1 version 2c tomas123
 !
 spanning-tree mode mstp
 !

@@ -329,7 +329,7 @@
 
 
 # # Retrieves SNMP values from remote agents
-# [[inputs.snmp]]
+[[inputs.snmp]]
 #   ## Agent addresses to retrieve values from.
 #   ##   example: agents = ["udp://127.0.0.1:161"]
 #   ##            agents = ["tcp://127.0.0.1:161"]
@@ -342,7 +342,7 @@
     version = 2
 #
 #   ## SNMP community string.
-    community = {{ var_influxdb.snmp_community }}
+    community = "{{ var_influxdb.snmp_community }}"
 #
 #   ## Number of retries to attempt.
     retries = 3

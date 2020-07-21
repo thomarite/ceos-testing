@@ -7,4 +7,6 @@
   tags:
     - tag_influxdb
     - tag_grafana
+    - tag_snmp
+    - tag_syslog
 ...

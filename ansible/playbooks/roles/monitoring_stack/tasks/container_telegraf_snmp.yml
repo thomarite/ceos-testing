@@ -1,12 +1,12 @@
 ---
-- name: CONTAINER TELEGRAF // CREATING FOLDER 
+- name: 1- CONTAINER TELEGRAF SNMP // CREATING FOLDER 
   file:
       dest: "{{ path_to_containers }}/{{ container_item }}"
       state: directory
   tags:
       - tag_snmp
 
-- name: CONTAINER TELEGRAF // GETTING IP OF INFLUXDB
+- name: 2- CONTAINER TELEGRAF SNMP // GETTING IP OF INFLUXDB
   docker_container:
       name: influxdb
   become: yes
@@ -14,14 +14,14 @@
   tags:
       - tag_snmp
 
-- name: CONTAINER TELEGRAF // TEMPLATING TELEGRAF CONFIG
+- name: 3- CONTAINER TELEGRAF SNMP // TEMPLATING TELEGRAF CONFIG
   template:
       src: "{{ container_item }}_template.j2"
       dest: "{{ path_to_containers }}/{{ container_item }}/telegraf.conf"
   tags:
       - tag_snmp
 
-- name: CONTAINER TELEGRAF // LAUNCHING CONTAINER
+- name: 4- CONTAINER TELEGRAF SNMP // LAUNCHING CONTAINER
   docker_container:
       name: telegraf_snmp
       image: telegraf
@@ -35,6 +35,11 @@
       volumes:
            - "/usr/share/snmp/mibs:/usr/share/snmp/mibs"
            - "{{ path_to_containers }}/{{ container_item }}/telegraf.conf:/etc/telegraf/telegraf.conf:ro"
+      log_driver: syslog
+      log_options:
+        syslog-address: "udp://172.18.0.4:6514"
+        tag: telegraf-snmp
+        syslog-format: rfc5424
   become: yes
   tags:
       - tag_snmp
