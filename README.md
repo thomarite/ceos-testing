@@ -488,6 +488,14 @@ This is my final dir tree
 
 I managed to get influxdb-telegraf-grafana working for this ceos lab and it is [documented](https://blog.thomarite.uk/index.php/2020/07/17/monitoring-influxdb-telegraf-grafana). I dont have anything automated with ansible :(
 
+Finally created an ansible role for building the monitoring stack and it works! Documented [here](https://blog.thomarite.uk/index.php/2020/07/21/monitoring-syslog-influxdb-telegraf-grafana-via-ansible-role)
+
+```
+ansible $ ansible-playbook  playbooks/monitoring.yaml -vvv --ask-become-pass
+```
+
+You need to provide your password so the playbook can run some commands as root via sudo.
+
 # To-Do
 
 To-Dos
