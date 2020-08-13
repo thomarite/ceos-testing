@@ -489,6 +489,8 @@ This is my final dir tree
 
 Added script "other-scripts/eos-ncc.py" based on this [blog](https://eos.arista.com/ncclient-example-with-eos/)
 
+The script just test the functionality to make config changes via netconf. It is not very flexible as all config is hardcoded.
+
 # Monitoring
 
 I managed to get influxdb-telegraf-grafana working for this ceos lab and it is [documented](https://blog.thomarite.uk/index.php/2020/07/17/monitoring-influxdb-telegraf-grafana). I dont have anything automated with ansible :(
