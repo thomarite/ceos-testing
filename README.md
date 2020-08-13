@@ -13,6 +13,7 @@
       * [Ansible Troubleshooting](#ansible-troubleshooting) 
    * [Jinja2](#jinja2)
    * [Openconfig](#openconfig)
+   * [ncclient](#ncclient)
    * [Monitoring](#monitoring)
    * [To-Do](#to-do)
    * [Diagrams](#diagrams)
@@ -483,6 +484,10 @@ This is my final dir tree
             └── vars
                 └── desired_openconfig_modules.yml
 ```
+
+# ncclient
+
+Added script "other-scripts/eos-ncc.py" based on this [blog](https://eos.arista.com/ncclient-example-with-eos/)
 
 # Monitoring
 
