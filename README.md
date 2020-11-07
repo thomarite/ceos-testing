@@ -43,7 +43,7 @@ cd mpls-sr/topology
 docker-topo --create ring.yml --> start-up topology
 docker ps -a
 docker-topo -s ring.yml   --> save config
-docker-topo --create ring.yml --> destroy topology
+docker-topo --destroy ring.yml --> destroy topology
 deactivate
 ```
 
