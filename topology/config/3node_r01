@@ -1,4 +1,6 @@
-! Startup-config last modified at  Thu Aug 13 12:52:28 2020 by root
+
+> show running
+! Command: show running-config at line 1
 ! device: r01 (cEOSLab, EOS-4.23.3M)
 !
 alias delta bash rm /.deltas/var/tmp/agents/core.*
@@ -127,9 +129,14 @@ management api http-commands
 !
 management api gnmi
    transport grpc GRPC
+      ssl profile SELFSIGNED
       port 3333
 !
 management api netconf
    transport ssh default
+!
+management security
+   ssl profile SELFSIGNED
+      certificate r01.crt key r01.key
 !
 end

@@ -1,4 +1,6 @@
-! Startup-config last modified at  Tue Jul 21 13:37:53 2020 by root
+
+> show running
+! Command: show running-config at line 1
 ! device: r02 (cEOSLab, EOS-4.23.3M)
 !
 alias delta bash rm /.deltas/var/tmp/agents/core.*
